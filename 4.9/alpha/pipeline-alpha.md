@@ -75,7 +75,9 @@ oc import-image redhat-marketplace-index \
 
 ### <a id="step5"></a>Step 5 - Install the Certification Pipeline and dependencies into the cluster
 ```bash
-oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines/operator-ci-pipeline.yml
+git clone git@github.com:redhat-openshift-ecosystem/operator-pipelines.git
+cd operator-pipelines
+oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.4/git-clone.yaml
