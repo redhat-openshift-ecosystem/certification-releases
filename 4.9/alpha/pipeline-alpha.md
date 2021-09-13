@@ -29,7 +29,7 @@
 3. A Git repo that contains the contents of your Operator Bundle
 4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool
 5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool
-6. [Install](https://git-scm.com/downloads) `.git`, the Git CLI tool
+6. [Install](https://git-scm.com/downloads) `git`, the Git CLI tool
 
 ## <a id="installation"></a>Installation
 
@@ -39,7 +39,7 @@
 * In the *Operators* submenu click on *OperatorHub*
 * Use the Filter/Search box to filter on *OpenShift Pipelines*
 * Click the *Red Hat OpenShift Pipelines* tile
-* In the fly out mneu to the right click the *Install* button near the top
+* In the flyout menu to the right click the *Install* button near the top
 * On the next screen "Install Operator" scroll to the bottom of the page and click *Install*
 
 ### <a id="step2"></a>Step 2 - Configure the OpenShift CLI tool (oc)
@@ -53,7 +53,7 @@ export KUBECONFIG=/path/to/your/cluster/kubeconfig
 ```bash
   oc create secret generic kubeconfig --from-file=kubeconfig=$KUBECONFIG
 ```
-> *This kubeconfig will be used by to deploy the Operator under test and run the certificaiton checks.*
+> *This kubeconfig will be used to deploy the Operator under test and run the certification checks.*
 
 ### <a id="step4"></a>Step 4 - Import Red Hat Catalogs
 ```bash
@@ -88,7 +88,7 @@ oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-cl
 # <a id="optional-config"></a>Optional Configuration
 
 ## <a id="digest-pinning-config"></a>Optional Step - If using digest pinning (recommended)
-The pipeline offers functionality that will automatically replace all image tags in your Bundle with Image Digest SHAs.This allows the pipeline to ensure it is using a pinned version of all images. The pipeline commit the pinned version of your Bundle to your GitHub repo as a new branch.  In order to do this a private key with access to GitHub needs to be added to your cluster as a secret. 
+The pipeline offers functionality that will automatically replace all image tags in your Bundle with Image Digest SHAs.This allows the pipeline to ensure it is using a pinned version of all images. The pipeline commits the pinned version of your Bundle to your GitHub repo as a new branch.  In order to do this a private key with access to GitHub needs to be added to your cluster as a secret. 
 
 ### <a id="private-key"></a>Add private key to access GitHub repo with Operator Bundle source
 Base64 encode a private key with access to GitHub repo containing the Bundle
@@ -134,9 +134,9 @@ oc create secret generic pyxis-api-secret --from-literal PYXIS_API_KEY.txt=< API
 By default the Pipeline will use the OpenShift Container Registry running in cluster.  If you would like to use a private registry you will need to add credentials for that registry.
 
 ### <a id="container-registry-creds"></a>Add credentials for the Container Registry
-The Pipeline with automatically build your Operator Bundle Image as well as a Bundle Image Index for testing and verfication.  
+The Pipeline will automatically build your Operator Bundle Image as well as a Bundle Image Index for testing and verification.  
 
-By default these images will be create in container registry on cluster but if you would like to leverage an external private registry you can provide the credentials by adding a secret to the cluster. 
+By default these images will be created in container registry on the cluster but if you would like to leverage an external private registry you can provide the credentials by adding a secret to the cluster. 
 
 ```bash
 oc create secret docker-registry registry-dockerconfig-secret \
@@ -151,12 +151,12 @@ oc create secret docker-registry registry-dockerconfig-secret \
 
 
 # <a id="execute-pipeline"></a>Execute the Pipeline (Development Iterations)
-There are multiple ways to execute the Pipeline.  Below are several examples but paramaters and workspaces can be removed or added per your requirements. 
+There are multiple ways to execute the Pipeline.  Below are several examples but parameters and workspaces can be removed or added per your requirements. 
 
 ## <a id="minimal-pipeline-run"></a>Minimal Pipeline Run
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 ```
 
@@ -181,7 +181,7 @@ After running this command you will be prompted for several additional parameter
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -210,7 +210,7 @@ tkn pipeline start operator-ci-pipeline-serial \
 ## <a id="private-registry-pipeline-run"></a>Pipeline Run with a Private Container Registry
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -240,7 +240,7 @@ tkn pipeline start operator-ci-pipeline-serial \
 # <a id="submit-result"></a>Submit Results to Red Hat
 * Execute the [Configuration Steps for Submitting Results](#submit-results)
 
-In order to submit results add the following `--param`'s and `--workspace` where `$UPSTREAM_REPO_NAME` is equal to the repo where the Pull Request will be submitted. Typically this is a Red Hat Certificaiton repo but you can use a repo of your own for testing.
+In order to submit results add the following `--param`'s and `--workspace` where `$UPSTREAM_REPO_NAME` is equal to the repo where the Pull Request will be submitted. Typically this is a Red Hat Certification repo but you can use a repo of your own for testing.
 ```bash
 --param upstream_repo_name=$UPSTREAM_REPO_NAME #Repo where Pull Request (PR) will be opened
 ```
@@ -255,7 +255,7 @@ In order to submit results add the following `--param`'s and `--workspace` where
 
 ## <a id="submit-result-minimal"></a>Submit results from Minimal Pipeline Run
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
 ```
@@ -280,7 +280,7 @@ tkn pipeline start operator-ci-pipeline-serial \
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -314,7 +314,7 @@ tkn pipeline start operator-ci-pipeline-serial \
 * Execute the [Configuration Steps for Submitting Results](#submit-results)
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -351,7 +351,7 @@ tkn pipeline start operator-ci-pipeline-serial \
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operaotr bundle>
+GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
