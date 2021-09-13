@@ -29,6 +29,7 @@
 3. A Git repo that contains the contents of your Operator Bundle
 4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool
 5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool
+6. [Install](https://git-scm.com/downloads) `.git`, the Git CLI tool
 
 ## <a id="installation"></a>Installation
 
@@ -75,6 +76,8 @@ oc import-image redhat-marketplace-index \
 
 ### <a id="step5"></a>Step 5 - Install the Certification Pipeline and dependencies into the cluster
 ```bash
+git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
+cd operator-pipelines
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines/operator-ci-pipeline.yml
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
