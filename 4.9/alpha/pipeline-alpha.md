@@ -134,7 +134,7 @@ oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github to
 ### <a id="container-api-key"></a>Add Red Hat Container API access key
 You can retrieve a Red Hat Container API Key by logging into connect.redhat.com as a technology partner. Once logged in, navigate to `Product Certification` > `Manage container API keys`
 ```bash
-oc create secret generic pyxis-api-secret --from-literal PYXIS_API_KEY=< API KEY >
+oc create secret generic pyxis-api-secret --from-literal pyxis_api_key=< API KEY >
 ```
 
 ## <a id="private-registry"></a>Optional Step - If using a private container registry
@@ -387,6 +387,3 @@ tkn pipeline start operator-ci-pipeline-serial \
   --showlog \
   --pod-template templates/crc-pod-template.yml
 ```
-
-## Troubleshooting
-appears to need SSH authentication but no SSH credentials have been provided
