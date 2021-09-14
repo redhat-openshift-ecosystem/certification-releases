@@ -2,6 +2,8 @@
 
 ## Table of Contents
 * [Before you start](#before-you-start)
+  * [What you will need](#what-you-need)
+  * [Preparing your Operator Bundle](#prepare-bundle)
 * [Installation](#installation)
   * [Step 1 - Install OpenShift Pipelines Operator](#step1) 
   * [Step 2 - Configure the OpenShift CLI tool](#step2)
@@ -23,13 +25,18 @@
   * [Submit results with Image Digest Pinning and a private container registry](#submit-result-registy-and-pinning)
 
 
-## <a id="before-you-start"></a>What you'll need before you start:
+## <a id="before-you-start"></a>Before you start:
+
+### <a id="what-you-need"></a>What you'll need before you start:
 1. An OpenShift Cluster *(recommended version 4.8 or above)*
 2. Kubeconfig file for a user with cluster admin privileges 
 3. A Git repo that contains the contents of your Operator Bundle
-4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool
-5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool
-6. [Install](https://git-scm.com/downloads) `git`, the Git CLI tool
+4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
+5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool (tested with version 0.19.1)
+6. [Install](https://git-scm.com/downloads) `git`, the Git CLI tool (tested with 2.32.0)
+
+### <a id="prepare-bundle"></a>Prepare your Operator Bundle before you start
+The certificaiton pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure is documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod).
 
 ## <a id="installation"></a>Installation
 
@@ -127,7 +134,7 @@ oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github to
 ### <a id="container-api-key"></a>Add Red Hat Container API access key
 You can retrieve a Red Hat Container API Key by logging into connect.redhat.com as a technology partner. Once logged in, navigate to `Product Certification` > `Manage container API keys`
 ```bash
-oc create secret generic pyxis-api-secret --from-literal PYXIS_API_KEY.txt=< API KEY >
+oc create secret generic pyxis-api-secret --from-literal PYXIS_API_KEY=< API KEY >
 ```
 
 ## <a id="private-registry"></a>Optional Step - If using a private container registry
@@ -165,7 +172,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --showlog \
@@ -192,7 +199,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -223,7 +230,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -267,7 +274,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param bundle_path=$BUNDLE_PATH \
   --param upstream_repo_name=$UPSTREAM_REPO_NAME \
   --param submit=true \
-  --param env=production \
+  --param env=stage \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
@@ -292,7 +299,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -328,7 +335,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -357,7 +364,6 @@ GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 REGISTRY=<your image registry.  ie: quay.io>
 IMAGE_NAMESPACE=<namespace in the container registry>
-UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
 ```
 
 ```bash
@@ -365,11 +371,11 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
-  --param upstream_repo_name=$UPSTREAM_REPO_NAME \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
   --param submit=true \
@@ -381,3 +387,6 @@ tkn pipeline start operator-ci-pipeline-serial \
   --showlog \
   --pod-template templates/crc-pod-template.yml
 ```
+
+## Troubleshooting
+appears to need SSH authentication but no SSH credentials have been provided
