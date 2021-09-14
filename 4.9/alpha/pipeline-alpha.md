@@ -96,7 +96,7 @@ Base64 encode a private key with access to GitHub repo containing the Bundle
 base64 /path/to/private/key
 ```
 
-Create a secrete that contains the base64 encoded private key
+Create a secret that contains the base64 encoded private key
 ```bash
 cat << EOF > ssh-secret.yml
 kind: Secret
