@@ -10,9 +10,9 @@
   * [Step 3 - Add the Kubeconfig secret](#step3)
   * [Step 4 - Import Red Hat Catalogs](#step4)
   * [Step 5 - Install the Certification Pipeline and dependencies into the cluster](#step5)
+  * [Step 6 - Create Secrets to submit your certification results to Red Hat](#submit-results)
 * [Optional configuration](#optional-config)
   * [Optional Step - If using digest pinning (recommended)](#digest-pinning-config)
-  * [Optional Step - If submitting your certification results to Red Hat](#submit-results)
   * [Optional Step - If using a private container registry](#private-registry)
 * [Pipeline Execution (Development/Iteration)](#execute-pipeline)
   * [Minimal Pipeline Run](#minimal-pipeline-run)
@@ -90,7 +90,21 @@ oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.4/git-clone.yaml
 ```
+## <a id="submit-results"></a>Step 6 - Create Secretes to submit your certification results to Red Hat
 
+### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
+
+Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline. 
+
+```bash
+oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github token>
+```
+
+### <a id="container-api-key"></a>Add Red Hat Container API access key
+You will recieve a specific API access to key to use for this step.
+```bash
+oc create secret generic pyxis-api-secret --from-literal pyxis_api_key=< API KEY >
+```
 
 # <a id="optional-config"></a>Optional Configuration
 
@@ -121,21 +135,7 @@ Add the secret to the cluster
 oc create -f ssh-secret.yml
 ```
 
-## <a id="submit-results"></a>Optional Step - If submitting your certification results to Red Hat
 
-### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
-
-Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline. 
-
-```bash
-oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github token>
-```
-
-### <a id="container-api-key"></a>Add Red Hat Container API access key
-You can retrieve a Red Hat Container API Key by logging into connect.redhat.com as a technology partner. Once logged in, navigate to `Product Certification` > `Manage container API keys`
-```bash
-oc create secret generic pyxis-api-secret --from-literal pyxis_api_key=< API KEY >
-```
 
 ## <a id="private-registry"></a>Optional Step - If using a private container registry
 By default the Pipeline will use the OpenShift Container Registry running in cluster.  If you would like to use a private registry you will need to add credentials for that registry.
@@ -264,7 +264,7 @@ In order to submit results add the following `--param`'s and `--workspace` where
 ```bash
 GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
 BUNDLE_PATH=<path to the bundle in the Git Repo>
-UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
+UPSTREAM_REPO_NAME=redhat-openshift-ecosystem/certified-operators-preprod
 ```
 
 ```bash
