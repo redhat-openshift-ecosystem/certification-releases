@@ -10,7 +10,7 @@
   * [Step 3 - Add the Kubeconfig secret](#step3)
   * [Step 4 - Import Red Hat Catalogs](#step4)
   * [Step 5 - Install the Certification Pipeline and dependencies into the cluster](#step5)
-  * [Step 6 - Create Secrets to submit your certification results to Red Hat](#submit-results)
+  * [Step 6 - Configuration Steps for Submitting Results](#submit-results)
 * [Optional configuration](#optional-config)
   * [Optional Step - If using digest pinning (recommended)](#digest-pinning-config)
   * [Optional Step - If using a private container registry](#private-registry)
@@ -90,7 +90,7 @@ oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.4/git-clone.yaml
 ```
-## <a id="submit-results"></a>Step 6 - Create Secretes to submit your certification results to Red Hat
+## <a id="submit-results"></a>Step 6 - Configuration Steps for Submitting Results
 
 ### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
 
