@@ -7,12 +7,13 @@
 * [Installation](#installation)
   * [Step 1 - Install OpenShift Pipelines Operator](#step1) 
   * [Step 2 - Configure the OpenShift CLI tool](#step2)
-  * [Step 3 - Add the Kubeconfig secret](#step3)
-  * [Step 4 - Import Red Hat Catalogs](#step4)
-  * [Step 5 - Install the Certification Pipeline and dependencies into the cluster](#step5)
-  * [Step 6 - Configuration Steps for Submitting Results](#submit-results)
+  * [Step 3 - Create an OpenShift Project (namespace) to work in](#step3)
+  * [Step 4 - Add the Kubeconfig secret](#step4)
+  * [Step 5 - Import Red Hat Catalogs](#step5)
+  * [Step 6 - Install the Certification Pipeline and dependencies into the cluster](#step6)
+  * [Step 7 - Configuration Steps for Submitting Results](#step7)
 * [Optional configuration](#optional-config)
-  * [Optional Step - If using digest pinning (recommended)](#digest-pinning-config)
+  * [Optional Step - If using digest pinning (required for submission)](#digest-pinning-config)
   * [Optional Step - If using a private container registry](#private-registry)
 * [Pipeline Execution (Development/Iteration)](#execute-pipeline)
   * [Minimal Pipeline Run](#minimal-pipeline-run)
@@ -90,14 +91,24 @@ Once you have the contents of your Operator bundle structured properly,
 ```bash
 export KUBECONFIG=/path/to/your/cluster/kubeconfig
 ```
+> *This kubeconfig will be used to deploy the Operator under test and run the certification checks.*
 
-### <a id="step3"></a>Step 3 - Add the Kubeconfig secret
+### <a id="step3"></a>Step 3 - Create an OpenShift Project (namespace) to work in
+```bash
+oc adm new-project <my-project-name> # create the project
+oc project <my-project-name> # switch into the project
+```
+> #### Troubeshooting Tip
+>
+> There are known issues running the pipeline in the `default` project/namespace. We recommend creating a project for the pipeline.
+
+### <a id="step4"></a>Step 4 - Add the Kubeconfig secret
 ```bash
   oc create secret generic kubeconfig --from-file=kubeconfig=$KUBECONFIG
 ```
-> *This kubeconfig will be used to deploy the Operator under test and run the certification checks.*
 
-### <a id="step4"></a>Step 4 - Import Red Hat Catalogs
+
+### <a id="step5"></a>Step 5 - Import Red Hat Catalogs
 ```bash
 oc import-image certified-operator-index \
   --from=registry.redhat.io/redhat/certified-operator-index \
@@ -116,7 +127,7 @@ oc import-image redhat-marketplace-index \
   --all
 ```
 
-### <a id="step5"></a>Step 5 - Install the Certification Pipeline and dependencies into the cluster
+### <a id="step6"></a>Step 6 - Install the Certification Pipeline and dependencies into the cluster
 ```bash
 git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
 cd operator-pipelines
@@ -125,7 +136,7 @@ oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.4/git-clone.yaml
 ```
-### <a id="submit-results"></a>Step 6 - Configuration Steps for Submitting Results
+### <a id="step7"></a>Step 7 - Configuration Steps for Submitting Results
 
 #### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
 
@@ -203,19 +214,18 @@ BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=stage \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
-  --showlog \
-  --pod-template templates/crc-pod-template.yml
+  --showlog
 ```
 After running this command you will be prompted for several additional parameters. Accept all the defaults. 
 
-> #### Troubleshooting TIp
+> #### Troubleshooting Tip
 >
 > If you see a Permission Denied error try the GITHUB `HTTPS URL` instead of the `SSH URL`. 
 
@@ -230,7 +240,7 @@ GIT_EMAIL=<your github email address>
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
@@ -241,10 +251,9 @@ tkn pipeline start operator-ci-pipeline-serial \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
-  --showlog \
-  --pod-template templates/crc-pod-template.yml
+  --showlog
 ```
-> #### Troubleshooting TIp
+> #### Troubleshooting Tip
 >
 > ##### Error: could not read Username for `https://github.com` 
 > try using the SSH GitHub URL in `--param git_repo_url`
@@ -261,7 +270,7 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
@@ -276,7 +285,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
   --showlog \
-  --pod-template templates/crc-pod-template.yml
+
 ```
 
 # <a id="submit-result"></a>Submit Results to Red Hat
@@ -303,7 +312,7 @@ UPSTREAM_REPO_NAME=redhat-openshift-ecosystem/certified-operators-preprod
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
@@ -313,8 +322,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
-  --showlog \
-  --pod-template templates/crc-pod-template.yml
+  --showlog
 ```
 
 ## <a id="submit-result-img-digest"></a>Submit results with Image Digest Pinning
@@ -330,7 +338,7 @@ UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
@@ -344,8 +352,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
-  --showlog \
-  --pod-template templates/crc-pod-template.yml
+  --showlog
 ```
 > #### Troubleshooting Tip
 >
@@ -366,7 +373,7 @@ UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
@@ -383,8 +390,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
-  --showlog \
-  --pod-template templates/crc-pod-template.yml
+  --showlog
 ```
 
 ## <a id="submit-result-registy-and-pinning"></a>Submit results with Image Digest Pinning and a private container registry
@@ -402,7 +408,7 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```
 
 ```bash
-tkn pipeline start operator-ci-pipeline-serial \
+tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
@@ -419,6 +425,5 @@ tkn pipeline start operator-ci-pipeline-serial \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
-  --showlog \
-  --pod-template templates/crc-pod-template.yml
+  --showlog
 ```
