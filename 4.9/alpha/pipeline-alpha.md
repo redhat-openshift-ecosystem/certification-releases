@@ -30,13 +30,22 @@
 ### <a id="what-you-need"></a>What you'll need before you start:
 1. An OpenShift Cluster *(recommended version 4.8 or above)*
 2. Kubeconfig file for a user with cluster admin privileges 
-3. A Git repo that contains the contents of your Operator Bundle
+3. The contents of your Operator Bundle
 4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
 5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool (tested with version 0.19.1)
 6. [Install](https://git-scm.com/downloads) `git`, the Git CLI tool (tested with 2.32.0)
 
 ### <a id="prepare-bundle"></a>Prepare your Operator Bundle before you start
-The certificaiton pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure is documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod).
+
+#### Bundle structure 
+The certification pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure are documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod).
+
+#### Fork the upstream repo
+Once you have the contents of your Operator bundle structured properly, 
+* Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators-preprod
+* git clone your fork of certified-operators-preprod
+* Add the contents of your Operator bundle to `operators` directory in your fork
+
 
 ## <a id="installation"></a>Installation
 
@@ -90,9 +99,9 @@ oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
 oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.4/git-clone.yaml
 ```
-## <a id="submit-results"></a>Step 6 - Configuration Steps for Submitting Results
+### <a id="submit-results"></a>Step 6 - Configuration Steps for Submitting Results
 
-### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
+#### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
 
 Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline. 
 
@@ -100,15 +109,15 @@ Upon completion the Pipeline can automatically open a Pull Request to submit you
 oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github token>
 ```
 
-### <a id="container-api-key"></a>Add Red Hat Container API access key
-You will recieve a specific API access to key to use for this step.
+#### <a id="container-api-key"></a>Add Red Hat Container API access key
+You will receive a specific API access key to use for this step.
 ```bash
 oc create secret generic pyxis-api-secret --from-literal pyxis_api_key=< API KEY >
 ```
 
 # <a id="optional-config"></a>Optional Configuration
 
-## <a id="digest-pinning-config"></a>Optional Step - If using digest pinning (recommended)
+## <a id="digest-pinning-config"></a>Optional Step - If using digest pinning (required when submitting to Red Hat)
 The pipeline offers functionality that will automatically replace all image tags in your Bundle with Image Digest SHAs.This allows the pipeline to ensure it is using a pinned version of all images. The pipeline commits the pinned version of your Bundle to your GitHub repo as a new branch.  In order to do this a private key with access to GitHub needs to be added to your cluster as a secret. 
 
 ### <a id="private-key"></a>Add private key to access GitHub repo with Operator Bundle source
@@ -138,12 +147,12 @@ oc create -f ssh-secret.yml
 
 
 ## <a id="private-registry"></a>Optional Step - If using a private container registry
-By default the Pipeline will use the OpenShift Container Registry running in cluster.  If you would like to use a private registry you will need to add credentials for that registry.
+By default the Pipeline will use the OpenShift Container Registry running in the cluster.  If you would like to use a private registry you will need to add credentials for that registry.
 
 ### <a id="container-registry-creds"></a>Add credentials for the Container Registry
 The Pipeline will automatically build your Operator Bundle Image as well as a Bundle Image Index for testing and verification.  
 
-By default these images will be created in container registry on the cluster but if you would like to leverage an external private registry you can provide the credentials by adding a secret to the cluster. 
+By default these images will be created in the container registry on the cluster but if you would like to leverage an external private registry you can provide the credentials by adding a secret to the cluster. 
 
 ```bash
 oc create secret docker-registry registry-dockerconfig-secret \
@@ -163,8 +172,8 @@ There are multiple ways to execute the Pipeline.  Below are several examples but
 ## <a id="minimal-pipeline-run"></a>Minimal Pipeline Run
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 ```
 
 ```bash
@@ -188,8 +197,8 @@ After running this command you will be prompted for several additional parameter
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 ```
@@ -217,8 +226,8 @@ tkn pipeline start operator-ci-pipeline-serial \
 ## <a id="private-registry-pipeline-run"></a>Pipeline Run with a Private Container Registry
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 REGISTRY=<your image registry.  ie: quay.io>
@@ -262,8 +271,8 @@ In order to submit results add the following `--param`'s and `--workspace` where
 
 ## <a id="submit-result-minimal"></a>Submit results from Minimal Pipeline Run
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 UPSTREAM_REPO_NAME=redhat-openshift-ecosystem/certified-operators-preprod
 ```
 
@@ -287,8 +296,8 @@ tkn pipeline start operator-ci-pipeline-serial \
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
@@ -321,8 +330,8 @@ tkn pipeline start operator-ci-pipeline-serial \
 * Execute the [Configuration Steps for Submitting Results](#submit-results)
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 REGISTRY=<your image registry.  ie: quay.io>
@@ -358,8 +367,8 @@ tkn pipeline start operator-ci-pipeline-serial \
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 
 ```bash
-GIT_REPO_URL=<enter the URL to the git repo containing the Operator bundle>
-BUNDLE_PATH=<path to the bundle in the Git Repo>
+GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 REGISTRY=<your image registry.  ie: quay.io>
@@ -371,7 +380,7 @@ tkn pipeline start operator-ci-pipeline-serial \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=production \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
