@@ -38,12 +38,38 @@
 ### <a id="prepare-bundle"></a>Prepare your Operator Bundle before you start
 
 #### Bundle structure 
-The certification pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure are documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod).
+The certification pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure are documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod). The high level structure is as follows:
+
+```bash
+operators
+└── my-operator
+    ├── 1.4.6
+    │   ├── manifests
+    │   │   ├── cache.example.com_my-operators.yaml
+    │   │   ├── my-operator-controller-manager-metrics-service_v1_service.yaml
+    │   │   ├── my-operator-manager-config_v1_configmap.yaml
+    │   │   ├── my-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml
+    │   │   └── my-operator.clusterserviceversion.yaml
+    │   └── metadata
+    │       └── annotations.yaml
+    └── ci.yaml
+```
+
+*ci.yaml*: This file should include your Red Hat Technology Partner project id
+``` bash
+cert_project_id: "<your partner project id>"
+```
+
+*annotations.yaml*: This file should include an OpenShift versions annotation
+```bash
+# OpenShift annotations.
+com.redhat.openshift.versions: v4.6-v4.8
+```
 
 #### Fork the upstream repo
 Once you have the contents of your Operator bundle structured properly, 
 * Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators-preprod
-* git clone your fork of certified-operators-preprod
+* git clone your fork of teh certified-operators-preprod repo
 * Add the contents of your Operator bundle to `operators` directory in your fork
 
 
