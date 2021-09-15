@@ -69,7 +69,7 @@ com.redhat.openshift.versions: v4.6-v4.8
 #### Fork the upstream repo
 Once you have the contents of your Operator bundle structured properly, 
 * Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators-preprod
-* git clone your fork of teh certified-operators-preprod repo
+* git clone your fork of the certified-operators-preprod repo
 * Add the contents of your Operator bundle to `operators` directory in your fork
 
 
