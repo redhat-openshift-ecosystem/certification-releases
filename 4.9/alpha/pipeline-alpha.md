@@ -289,7 +289,7 @@ tkn pipeline start operator-ci-pipeline \
 ```
 
 # <a id="submit-result"></a>Submit Results to Red Hat
-* Execute the [Configuration Steps for Submitting Results](#submit-results)
+* Execute the [Configuration Steps for Submitting Results](#step7)
 
 In order to submit results add the following `--param`'s and `--workspace` where `$UPSTREAM_REPO_NAME` is equal to the repo where the Pull Request will be submitted. Typically this is a Red Hat Certification repo but you can use a repo of your own for testing.
 ```bash
@@ -326,7 +326,7 @@ tkn pipeline start operator-ci-pipeline \
 ```
 
 ## <a id="submit-result-img-digest"></a>Submit results with Image Digest Pinning
-* Execute the [Configuration Steps for Submitting Results](#submit-results)
+* Execute the [Configuration Steps for Submitting Results](#step7)
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
@@ -360,7 +360,7 @@ tkn pipeline start operator-ci-pipeline \
 > try using the SSH GitHub URL in `--param git_repo_url`
 
 ## <a id="submit-result-private-registy"></a>Submit results with a private container registry
-* Execute the [Configuration Steps for Submitting Results](#submit-results)
+* Execute the [Configuration Steps for Submitting Results](#step7)
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
 GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
@@ -394,7 +394,7 @@ tkn pipeline start operator-ci-pipeline \
 ```
 
 ## <a id="submit-result-registy-and-pinning"></a>Submit results with Image Digest Pinning and a private container registry
-* Execute the [Configuration Steps for Submitting Results](#submit-results)
+* Execute the [Configuration Steps for Submitting Results](#step7)
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 
