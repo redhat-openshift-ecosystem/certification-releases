@@ -412,7 +412,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=production \
+  --param env=stage \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
