@@ -308,7 +308,6 @@ In order to submit results add the following `--param`'s and `--workspace` where
 ```bash
 GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
-UPSTREAM_REPO_NAME=redhat-openshift-ecosystem/certified-operators-preprod
 ```
 
 ```bash
@@ -316,7 +315,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param upstream_repo_name=$UPSTREAM_REPO_NAME \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
   --param env=stage \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
@@ -334,7 +333,6 @@ GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
-UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
 ```
 
 ```bash
@@ -346,7 +344,7 @@ tkn pipeline start operator-ci-pipeline \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
-  --param upstream_repo_name=$UPSTREAM_REPO_NAME \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
@@ -369,7 +367,6 @@ GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
 REGISTRY=<your image registry.  ie: quay.io>
 IMAGE_NAMESPACE=<namespace in the container registry>
-UPSTREAM_REPO_NAME=<upstream repo where submission Pull Request is opened>
 ```
 
 ```bash
@@ -383,7 +380,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_email=$GIT_EMAIL \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
-  --param upstream_repo_name=$UPSTREAM_REPO_NAME \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
