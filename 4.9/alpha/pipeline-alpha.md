@@ -42,18 +42,24 @@
 The certification pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure are documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod). The high level structure is as follows:
 
 ```bash
-operators
-└── my-operator
-    ├── 1.4.6
-    │   ├── manifests
-    │   │   ├── cache.example.com_my-operators.yaml
-    │   │   ├── my-operator-controller-manager-metrics-service_v1_service.yaml
-    │   │   ├── my-operator-manager-config_v1_configmap.yaml
-    │   │   ├── my-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml
-    │   │   └── my-operator.clusterserviceversion.yaml
-    │   └── metadata
-    │       └── annotations.yaml
-    └── ci.yaml
+├── config.yaml
+├── operators
+  └── my-operator
+      ├── 1.4.6
+      │   ├── manifests
+      │   │   ├── cache.example.com_my-operators.yaml
+      │   │   ├── my-operator-controller-manager-metrics-service_v1_service.yaml
+      │   │   ├── my-operator-manager-config_v1_configmap.yaml
+      │   │   ├── my-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml
+      │   │   └── my-operator.clusterserviceversion.yaml
+      │   └── metadata
+      │       └── annotations.yaml
+      └── ci.yaml
+```
+
+*config.yaml*: This file should include the organization your are targeting for distribution of your Operator. The value should be either `certified-operators` or `redhat-marketplace`. See the example below:
+``` bash
+organization: certified-operators
 ```
 
 *ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
@@ -61,7 +67,7 @@ operators
 cert_project_id: "<your partner project id>"
 ```
 
-*annotations.yaml*: This file should include an OpenShift versions annotation
+*annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
 ```bash
 # OpenShift annotations.
 com.redhat.openshift.versions: v4.6-v4.8
