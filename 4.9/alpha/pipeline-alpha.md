@@ -62,12 +62,12 @@ The certification pipeline expects you to have the source files for your Operato
 organization: certified-operators
 ```
 
-*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
+*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator.
 ``` bash
 cert_project_id: "<your partner project id>"
 ```
 
-*annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
+*annotations.yaml*: This file should include an OpenShift versions annotation, which refers to the range of OpenShift versions you are targetting (e.g. v4.6-v4.8 means 4.6, 4.7 and 4.8). *(This should be added to any existing content)*
 ```bash
 # OpenShift annotations.
 com.redhat.openshift.versions: v4.6-v4.8
