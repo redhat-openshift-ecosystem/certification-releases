@@ -72,6 +72,7 @@ cert_project_id: "<your partner project id>"
 # OpenShift annotations.
 com.redhat.openshift.versions: v4.6-v4.8
 ```
+An example Operator Bundle can be found [here](https://github.com/opdev/simple-demo-pipeline/tree/main/operators/simple-demo-operator).
 
 #### Fork the upstream repo
 Once you have the contents of your Operator bundle structured properly, 
