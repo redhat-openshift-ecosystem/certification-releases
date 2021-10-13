@@ -62,7 +62,7 @@ The certification pipeline expects you to have the source files for your Operato
 organization: certified-operators
 ```
 
-*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
+*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/beta/pipeline-overview.md#step-a---get-project-id). 
 ``` bash
 cert_project_id: "<your partner project id>"
 ```
