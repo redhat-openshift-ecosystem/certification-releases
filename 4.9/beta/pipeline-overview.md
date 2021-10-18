@@ -25,7 +25,7 @@ The container API key can be obtained from connect.redhat.com
 6. In the dropdown click the Container API kyes link
 7. From the `My API Keys` screen click the `Generate New Key` button
 8. In the popup screen enter a descriptive Key Name and click the `save` button
-9. Your API Key will be generate and displayed on screen. 
+9. Your API Key will be generated and displayed on screen. 
 > Important: Copy the API Key from the screen as you won't be able to view it again
 
 ## Step C - Install Pipeline
@@ -60,7 +60,7 @@ Take note of the `operators` directory in the forked repo. Add your Operator Bun
 1. Under the `operators` directory, create a new directory with the name of your operator.  
 1. Inside of this newly created directory add your `ci.yaml`.  
 1. Also, under the new directory create a subdirectory for each version of your Operator.  
-1. In each version directory their should be a `manifests/` directory containing your OpenShift yaml files and a `metadata/` directory containing your `annotations.yaml` file.
+1. In each version directory there should be a `manifests/` directory containing your OpenShift yaml files and a `metadata/` directory containing your `annotations.yaml` file.
 
 For details on creating an Operator Bundle, see the [instructions here](https://sdk.operatorframework.io/docs/olm-integration/). 
 
@@ -83,7 +83,7 @@ By default the Certification Pipeline will run with the OpenShift internal regis
 [Instructions for running the pipeline with an external public or private registry.](ci-pipeline-beta.md#private-registry-pipeline-run)
 
 ## Step G - Fix Issues
-With the CI Pipeline you will be able to iterate on our Operator Bundle to ensure it meets all the requirements for Red Hat Certification. When you execute the pipeline you will be able to view logs that contain details about any errors or failures that will need to addressed before obtaining certfication. 
+With the CI Pipeline you will be able to iterate on our Operator Bundle to ensure it meets all the requirements for Red Hat Certification. When you execute the pipeline you will be able to view logs that contain details about any errors or failures that will need to be addressed before obtaining certification. 
 
 #### Reading logs from the terminal
 When executing the pipeline using the `tkn` cli tool logs will be printed in the terminal. 
