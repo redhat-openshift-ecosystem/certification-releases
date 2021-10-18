@@ -57,7 +57,7 @@ The certification pipeline expects you to have the source files for your Operato
       └── ci.yaml
 ```
 
-*config.yaml*: This file should include the organization your are targeting for distribution of your Operator. The value should be either `certified-operators` or `redhat-marketplace`. See the example below:
+*config.yaml*: This file should include the organization you are targeting for distribution of your Operator. The value should be either `certified-operators` or `redhat-marketplace`. See the example below:
 ``` bash
 organization: certified-operators
 ```
@@ -104,7 +104,7 @@ export KUBECONFIG=/path/to/your/cluster/kubeconfig
 oc adm new-project <my-project-name> # create the project
 oc project <my-project-name> # switch into the project
 ```
-> #### Troubeshooting Tip
+> #### Troubleshooting Tip
 >
 > There are known issues running the pipeline in the `default` project/namespace. We recommend creating a project for the pipeline.
 
