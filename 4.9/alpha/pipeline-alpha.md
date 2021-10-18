@@ -139,8 +139,6 @@ git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
 cd operator-pipelines
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
-oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/yaml-lint/0.1/yaml-lint.yaml
-oc apply -f  https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.4/git-clone.yaml
 ```
 ### <a id="step7"></a>Step 7 - Configuration Steps for Submitting Results
 
