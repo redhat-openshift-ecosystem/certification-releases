@@ -1,5 +1,8 @@
-# Operator Certification CI Pipeline<br/>Beta Instructions
+# Operator Certification CI Pipeline<br/>Instructions
+## <a id="before-you-start"></a>Get Help:
+Technology Partner Success Desk is a service  for all our technology partners where they can ask technical and non-technical questions pertaining to Red Hat offerings, programs, engagement processes, etc. If you run into any issues throughout these instructions please reach out to the Technology Partner Success Desk. 
 
+You can access the Success Desk by going to: [Red Hat Help Request](https://connect.redhat.com/support/technology-partner/#/). 
 ## Table of Contents
 * [Before you start](#before-you-start)
   * [What you will need](#what-you-need)
@@ -24,7 +27,6 @@
   * [Submit results with Image Digest Pinning](#submit-result-img-digest)
   * [Submit results with a private container registry](#submit-result-private-registy)
   * [Submit results with Image Digest Pinning and a private container registry](#submit-result-registy-and-pinning)
-
 
 ## <a id="before-you-start"></a>Before you start:
 
@@ -62,7 +64,7 @@ The certification pipeline expects you to have the source files for your Operato
 organization: certified-operators
 ```
 
-*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/beta/pipeline-overview.md#step-a---get-project-id). 
+*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
 ``` bash
 cert_project_id: "<your partner project id>"
 ```
@@ -152,7 +154,7 @@ oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github to
 ```
 
 #### <a id="container-api-key"></a>Add Red Hat Container API access key
-You will receive a specific API access key to use for this step.
+This API access key is specifically to your unique partner account related to Red Hat Connect portal. Instructions to obtain your API key can be found: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-b---get-api-key). 
 ```bash
 oc create secret generic pyxis-api-secret --from-literal pyxis_api_key=< API KEY >
 ```
@@ -188,8 +190,10 @@ oc create -f ssh-secret.yml
 
 
 
-## <a id="private-registry"></a>Optional Step - If using a private container registry
-By default the Pipeline will use the OpenShift Container Registry running in the cluster.  If you would like to use a private registry you will need to add credentials for that registry.
+## <a id="private-registry"></a>Required Step (Will be Optional soon) - If using a private container registry
+By default the Pipeline will use the OpenShift Container Registry running in the cluster. 
+
+NOTE: There is a known bug here that is being addressed, see [here.](https://github.com/redhat-openshift-ecosystem/openshift-preflight/issues/283) Until this is corrected, please use an external registry and follow these steps:
 
 ### <a id="container-registry-creds"></a>Add credentials for the Container Registry
 The Pipeline will automatically build your Operator Bundle Image as well as a Bundle Image Index for testing and verification.  
