@@ -154,7 +154,7 @@ oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github to
 ```
 
 #### <a id="container-api-key"></a>Add Red Hat Container API access key
-This API access key is specifically to your unique partner account related to Red Hat Connect portal. Instructions to obtain your API key can be found: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-b---get-api-key). 
+This API access key is specifically related to your unique partner account for Red Hat Connect portal. Instructions to obtain your API key can be found: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-b---get-api-key). 
 ```bash
 oc create secret generic pyxis-api-secret --from-literal pyxis_api_key=< API KEY >
 ```
