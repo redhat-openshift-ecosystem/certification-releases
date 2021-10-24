@@ -6,3 +6,19 @@ To provide a real-time view into the release activity of the GA Operator Certifi
 Container Factory - Partner Certification Workflow Maintenance (<a href = "https://status.redhat.com/incidents/cnhb5rzb9mdq">Scheduled for Oct 24, 08:00 EDT to Oct 25, 16:00 EDT</a>)
 
 
+## Release Activities and Status
+
+| Activity 	| Scheduled Start Time (UTC) 	| Status 	|
+|----------	|----------------------	|--------	|
+| Red Hat Connect in Maintenance Mode     | 24 Oct, 1200     | Complete       	|
+| Incoming cert tooling disabled         	| 24 Oct, 1200     | Complete        	|
+| Verification of empty cert pipelines   	| 24 Oct, 1400    	|  Complete      	|
+| Backup verifications   	| 25 Oct, 0700    	|        	|
+| Necessary database schema updates   	| 25 Oct, 0730    	|        	|
+| Database schema update confirmations | 25 Oct, 0800
+| New certification tooling enablement   	| 25 Oct, 0800    	|        	|
+| Certification tooling smoketesting    	| 25 Oct, 0830    	|        	|
+| Red Hat Connect app updates   	| 25 Oct, 0900    	|        	|
+| Certification pipeline Testing   	| 25 Oct, 0930    	|        	|
+| Red Hat Connect in Production Mode | 25 Oct, 2000    	|        	|
+| Outage Complete | 25 Oct, 2000    	|  	|
