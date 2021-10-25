@@ -26,12 +26,12 @@ The container API key can be obtained from connect.redhat.com
 7. From the `My API Keys` screen click the `Generate New Key` button
 8. In the popup screen enter a descriptive Key Name and click the `save` button
 9. Your API Key will be generated and displayed on screen. 
-> Important: Copy the API Key from the screen as you won't be able to view it again
+> Important: Copy the API Key from the screen as you won't be able to view it again. If you are having issues obtaining an API Key, please reach out to the Success Desk by going to: [Red Hat Help Request](https://connect.redhat.com/support/technology-partner/#/).
 
 ## Step C - Install Pipeline
 The OpenShift Operator Certification Pipeline is based upon the open source cloud native CI/CD project named [Tekton](https://tekton.dev/)
 
-To install the Pipeline follow the Alpha Instructions. In particular you will need to execute [Step 1](ci-pipeline-beta.md#step1), [Step 2](ci-pipeline-beta.md#step2), [Step 3](ci-pipeline-beta.md#step3), [Step 4](ci-pipeline-beta.md#step4), [Step 5](ci-pipeline-beta.md#step5), [Step 6](ci-pipeline-beta.md#step6) and [Step 7](ci-pipeline-beta.md#step7)
+To install the Pipeline follow the Pipeline Instructions. In particular you will need to execute [Step 1](ci-pipeline.md#step1), [Step 2](ci-pipeline.md#step2), [Step 3](ci-pipeline.md#step3), [Step 4](ci-pipeline.md#step4), [Step 5](ci-pipeline.md#step5), [Step 6](ci-pipeline.md#step6) and [Step 7](ci-pipeline.md#step7)
 
 ## Step D - Fork Upstream
 The OpenShift Operator Certification workflow is based upon Tekton Pipelines and GitHub Pull Requests.  In this step you create a forked copy of the [Red Hat Certified Operators Preprod](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod) repository. 
@@ -70,17 +70,17 @@ Once your Operator Bundle has been added to your forked version of the Preprod r
 #### Minimal Pipeline Run
 This is the most basic pipeline run. It does not include digest pinning, which will be required for submission, but the minimal pipeline run is useful for testing and iteration. The minimal pipeline run leverages the internal OpenShift container registry
 
-[Instructions for a minimal pipeline run.](ci-pipeline-beta.md#minimal-pipeline-run)
+[Instructions for a minimal pipeline run.](ci-pipeline.md#minimal-pipeline-run)
 
 #### Pipeline Run with Image Digest Pinning
 Digest Pinning is required when submitting the results to Red Hat. Container images can be referenced by tags or by SHA digest.  For Red Hat Certification we require the SHA digest for all containers. This requirement is due to the fact that tags are mutable and can be changed underneath us whereas SHA digest are immutable.  The Digest Pinning function in the pipeline will scan through all the manifest files looking for tags and if found, the tool will replace the tags with SHA digest.
 
-[Instructions for a pipeline run with image digest pinning.](ci-pipeline-beta.md#img-digest-pipeline-run)
+[Instructions for a pipeline run with image digest pinning.](ci-pipeline.md#img-digest-pipeline-run)
 
 #### Pipeline Run with a Private Container Registry
 By default the Certification Pipeline will run with the OpenShift internal registry. If you want to use a different public or private registry, that is supported as well.
 
-[Instructions for running the pipeline with an external public or private registry.](ci-pipeline-beta.md#private-registry-pipeline-run)
+[Instructions for running the pipeline with an external public or private registry.](ci-pipeline.md#private-registry-pipeline-run)
 
 ## Step G - Fix Issues
 With the CI Pipeline you will be able to iterate on our Operator Bundle to ensure it meets all the requirements for Red Hat Certification. When you execute the pipeline you will be able to view logs that contain details about any errors or failures that will need to be addressed before obtaining certification. 
