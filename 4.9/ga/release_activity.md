@@ -17,8 +17,8 @@ Container Factory - Partner Certification Workflow Maintenance (<a href = "https
 | Necessary database schema updates   	| 25 Oct, 0730    	| Complete        	|
 | Database schema update confirmations | 25 Oct, 0800 | Complete |
 | New certification tooling enablement   	| 25 Oct, 0800    	| Complete       	|
-| Certification tooling smoketesting    	| 25 Oct, 0830    	| In progress       	|
-| Red Hat Connect app updates   	| 25 Oct, 0900    	| In progress       	|
-| Certification pipeline Testing   	| 25 Oct, 0930    	| In progress       	|
-| Red Hat Connect in Production Mode | 25 Oct, 2000    	|        	|
-| Outage Complete | 25 Oct, 2000    	|  	|
+| Certification tooling smoketesting    	| 25 Oct, 0830    	| Complete       	|
+| Red Hat Connect app updates   	| 25 Oct, 0900    	| Complete       	|
+| Certification pipeline Testing   	| 25 Oct, 0930    	| Complete       	|
+| Red Hat Connect in Production Mode | 65 Oct, 1600    	| Complete       	|
+| Outage Complete | 26 Oct, 1600    	| Complete 	|
