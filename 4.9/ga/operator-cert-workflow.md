@@ -12,7 +12,7 @@ The Project ID can be obtained from connect.redhat.com
 5. In the top navigation click the Product certification dropdown
 6. In the dropdown click the Manage certification projects link
 7. Click the project link with **Type: Operator Bundle Image**
-9. From the **Operator Bundle Image** project page, pull the project ID from the URL
+8. From the **Operator Bundle Image** project page, pull the project ID from the URL
 > Example: project id: `617954f8c41de7ab3fe03dc3`
 
 ## Step B - Get API Key
