@@ -11,9 +11,9 @@ The Project ID can be obtained from connect.redhat.com
 4. Login with your Red Hat Credentials
 5. In the top navigation click the Product certification dropdown
 6. In the dropdown click the Manage certification projects link
-7. Click the project link in the Project Name column for the target project
-8. From the project page pull the project ID from the URL or from the PID: displayed on screen
-> Note: If using the project ID from the PID, drop the `ospid-` prefix.  The remaining string is the project id. 
+7. Click the project link with **Type: Operator Bundle Image**
+8. From the **Operator Bundle Image** project page, pull the project ID from the URL
+> Example: project id: `617954f8c41de7ab3fe03dc3`
 
 ## Step B - Get API Key
 The container API key can be obtained from connect.redhat.com
