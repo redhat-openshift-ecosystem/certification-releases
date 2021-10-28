@@ -225,9 +225,9 @@ BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --showlog
@@ -251,9 +251,9 @@ GIT_EMAIL=<your github email address>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=prod \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -281,9 +281,9 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=prod \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -322,11 +322,11 @@ BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
-  --param env=stage \
+  --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
@@ -347,9 +347,9 @@ GIT_EMAIL=<your github email address>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=prod \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -381,9 +381,9 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=prod \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
@@ -416,9 +416,9 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branch=stage \
+  --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param env=stage \
+  --param env=prod \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
