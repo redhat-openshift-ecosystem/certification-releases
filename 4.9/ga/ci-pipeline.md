@@ -32,7 +32,7 @@ You can access the Success Desk by going to: [Red Hat Help Request](https://conn
 
 ### <a id="what-you-need"></a>What you'll need before you start:
 1. An OpenShift Cluster *(recommended version 4.8 or above)*
-2. Kubeconfig file for a user with cluster admin privileges 
+2. Kubeconfig file for a user with **cluster admin privileges**
 3. The contents of your Operator Bundle
 4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
 5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool (tested with version 0.19.1)
@@ -41,7 +41,7 @@ You can access the Success Desk by going to: [Red Hat Help Request](https://conn
 ### <a id="prepare-bundle"></a>Prepare your Operator Bundle before you start
 
 #### Bundle structure 
-The certification pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure are documented here](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod). The high level structure is as follows:
+The certification pipeline expects you to have the source files for your Operator bundle. The Operator bundle consists of a specific directory structure. Details about the [expected structure are documented here](https://github.com/redhat-openshift-ecosystem/certified-operators). The high level structure is as follows:
 
 ```bash
 ├── config.yaml
@@ -78,8 +78,8 @@ com.redhat.openshift.versions: v4.6-v4.8
 
 #### Fork the upstream repo
 Once you have the contents of your Operator bundle structured properly, 
-* Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators-preprod
-* git clone your fork of the certified-operators-preprod repo
+* Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators
+* git clone your fork of the certified-operators repo
 * Add the contents of your Operator bundle to `operators` directory in your fork
 
 
@@ -218,7 +218,7 @@ There are multiple ways to execute the Pipeline.  Below are several examples but
 ## <a id="minimal-pipeline-run"></a>Minimal Pipeline Run
 
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 ```
 
@@ -242,7 +242,7 @@ After running this command you will be prompted for several additional parameter
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -270,7 +270,7 @@ tkn pipeline start operator-ci-pipeline \
 ## <a id="private-registry-pipeline-run"></a>Pipeline Run with a Private Container Registry
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -315,7 +315,7 @@ In order to submit results add the following `--param`'s and `--workspace` where
 
 ## <a id="submit-result-minimal"></a>Submit results from Minimal Pipeline Run
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 ```
 
@@ -324,7 +324,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
   --param git_branach=main \
   --param bundle_path=$BUNDLE_PATH \
-  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param submit=true \
   --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
@@ -338,7 +338,7 @@ tkn pipeline start operator-ci-pipeline \
 * Execute the [Configuration Steps for Digest Pinning](#digest-pinning-config)
 
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -353,7 +353,7 @@ tkn pipeline start operator-ci-pipeline \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
-  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
@@ -370,7 +370,7 @@ tkn pipeline start operator-ci-pipeline \
 * Execute the [Configuration Steps for Submitting Results](#step7)
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -389,7 +389,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_email=$GIT_EMAIL \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
-  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
   --workspace name=kubeconfig,secret=kubeconfig \
@@ -405,7 +405,7 @@ tkn pipeline start operator-ci-pipeline \
 * Execute the [Configuration Steps for Private Registries](#private-registry)
 
 ```bash
-GIT_REPO_URL=<Git URL to your certified-operators-preprod fork >
+GIT_REPO_URL=<Git URL to your certified-operators fork >
 BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.8)
 GIT_USERNAME=<your github username>
 GIT_EMAIL=<your github email address>
@@ -422,7 +422,7 @@ tkn pipeline start operator-ci-pipeline \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
-  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
+  --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
   --param submit=true \
