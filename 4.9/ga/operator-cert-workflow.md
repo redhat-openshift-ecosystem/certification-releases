@@ -1,4 +1,5 @@
 # CI Pipeline Overview
+This is a general overview of the new Operator Bundle certification. Detailed instructions can be found: [HERE.](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/ci-pipeline.md#operator-certification-ci-pipelineinstructions)
 
 ![CI Cert Pipeline Flow](assets/ci-pipeline-overview.png)
 
