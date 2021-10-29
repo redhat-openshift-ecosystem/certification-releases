@@ -225,7 +225,7 @@ BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
@@ -251,7 +251,7 @@ GIT_EMAIL=<your github email address>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --param pin_digests=true \
@@ -281,7 +281,7 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --param pin_digests=true \
@@ -322,7 +322,7 @@ BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param submit=true \
@@ -347,7 +347,7 @@ GIT_EMAIL=<your github email address>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --param pin_digests=true \
@@ -381,7 +381,7 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --param pin_digests=true \
@@ -416,7 +416,7 @@ IMAGE_NAMESPACE=<namespace in the container registry>
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --param pin_digests=true \
