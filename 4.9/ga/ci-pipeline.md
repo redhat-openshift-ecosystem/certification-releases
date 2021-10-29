@@ -225,7 +225,7 @@ BUNDLE_PATH=<path to the bundle in the Git Repo> (ie: operators/my-operator/1.2.
 ```bash
 tkn pipeline start operator-ci-pipeline \
   --param git_repo_url=$GIT_REPO_URL \
-  --param git_branach=main \
+  --param git_branch=main \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
