@@ -34,12 +34,12 @@ The OpenShift Operator Certification Pipeline is based upon the open source clou
 To install the Pipeline follow the Pipeline Instructions. In particular you will need to execute [Step 1](ci-pipeline.md#step1), [Step 2](ci-pipeline.md#step2), [Step 3](ci-pipeline.md#step3), [Step 4](ci-pipeline.md#step4), [Step 5](ci-pipeline.md#step5), [Step 6](ci-pipeline.md#step6) and [Step 7](ci-pipeline.md#step7)
 
 ## Step D - Fork Upstream
-The OpenShift Operator Certification workflow is based upon Tekton Pipelines and GitHub Pull Requests.  In this step you create a forked copy of the [Red Hat Certified Operators Preprod](https://github.com/redhat-openshift-ecosystem/certified-operators-preprod) repository. 
+The OpenShift Operator Certification workflow is based upon Tekton Pipelines and GitHub Pull Requests.  In this step you create a forked copy of the [Red Hat Certified Operators](https://github.com/redhat-openshift-ecosystem/certified-operators) repository. 
 
 Instructions for forking a GitHub repo [can be found here](https://docs.github.com/en/get-started/quickstart/fork-a-repo). 
 
 ## Step E - Add Operator Bundle
-Once you have forked the upstream preprod repo you will need to add your Operator bundle to the forked repo. The forked repo will have a directory structure similar to the structure outlined below. 
+Once you have forked the upstream repo you will need to add your Operator bundle to the forked repo. The forked repo will have a directory structure similar to the structure outlined below. 
 
 ```bash
 ├── config.yaml
