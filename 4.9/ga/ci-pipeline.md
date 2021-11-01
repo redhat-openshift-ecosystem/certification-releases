@@ -190,7 +190,7 @@ oc create -f ssh-secret.yml
 
 
 
-## <a id="private-registry"></a>Required Step (Will be Optional soon) - If using a private container registry
+## <a id="private-registry"></a>Optional Step - If using a private container registry
 By default the Pipeline will use the OpenShift Container Registry running in the cluster. 
 
 NOTE: There is a known bug here that is being addressed, see [here.](https://github.com/redhat-openshift-ecosystem/openshift-preflight/issues/283) Until this is corrected, please use an external registry and follow these steps:
