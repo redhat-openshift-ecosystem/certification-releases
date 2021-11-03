@@ -1,8 +1,9 @@
 # Operator Certification CI Pipeline<br/>Instructions
-## <a id="before-you-start"></a>Get Help:
-Technology Partner Success Desk is a service  for all our technology partners where they can ask technical and non-technical questions pertaining to Red Hat offerings, programs, engagement processes, etc. If you run into any issues throughout these instructions please reach out to the Technology Partner Success Desk. 
+## Get Help:
+> Technology Partner Success Desk is a service  for all our technology partners where they can ask technical and non-technical questions pertaining to Red Hat offerings, programs, engagement processes, etc. If you run into any issues throughout these instructions please reach out to the Technology Partner Success Desk. 
+>
+> You can access the Success Desk by going to: [Red Hat Help Request](https://connect.redhat.com/support/technology-partner/#/). 
 
-You can access the Success Desk by going to: [Red Hat Help Request](https://connect.redhat.com/support/technology-partner/#/). 
 ## Table of Contents
 * [Before you start](#before-you-start)
   * [What you will need](#what-you-need)
@@ -64,7 +65,9 @@ The certification pipeline expects you to have the source files for your Operato
 organization: certified-operators
 ```
 
-*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
+*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
+
+You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
 ``` bash
 cert_project_id: "<your partner project id>"
 ```
