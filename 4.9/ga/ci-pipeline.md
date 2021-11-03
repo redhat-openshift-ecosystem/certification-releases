@@ -33,11 +33,13 @@
 
 ### <a id="what-you-need"></a>What you'll need before you start:
 1. An OpenShift Cluster *(recommended version 4.8 or above)*
+> Note: The CI Pipeline will make a Persistent Volume claim for a 5GB volume. If you are running an OpenShift cluster on [bare metal](https://docs.openshift.com/container-platform/4.7/installing/installing_bare_metal/installing-bare-metal.html), ensure you have configured [Dynamic Volume Provisioning](https://kubernetes.io/docs/concepts/storage/dynamic-provisioning/). If you do not have Dynamic Volume Provisioning configured, consider setting up a [Local Volume](https://kubernetes.io/docs/concepts/storage/volumes/#local). The Local Volume storage path must have the `container_file_t` SELinux label to avoid Permission Denied errors, i.e. `chcon -Rv -t container_file_t "storage_path(/.*)?"`.
+
 2. Kubeconfig file for a user with **cluster admin privileges**
-3. The contents of your Operator Bundle
-4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
-5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool (tested with version 0.19.1)
-6. [Install](https://git-scm.com/downloads) `git`, the Git CLI tool (tested with 2.32.0)
+4. The contents of your Operator Bundle
+5. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
+6. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool (tested with version 0.19.1)
+7. [Install](https://git-scm.com/downloads) `git`, the Git CLI tool (tested with 2.32.0)
 
 ### <a id="prepare-bundle"></a>Prepare your Operator Bundle before you start
 
