@@ -65,11 +65,22 @@ You can find instructions on where to find your project id: [here](https://githu
 
 * Under the version directory, add a `manifests` folder containing all your OpenShift manifests including your `clusterserviceversion.yaml`
 * Under the version directory, add a `metadata` directory including your `annotations.yaml` file. 
-*annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
+* *annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
 ```bash
-# OpenShift annotations.
-com.redhat.openshift.versions: v4.6-v4.8
+# OpenShift annotations example:
+com.redhat.openshift.versions: v4.6-v4.9
 ```
+The `com.redhat.openshift.versions` field, part of the metadata in the operator bundle, is used to determine whether an operator is included in the certified catalog for a given OpenShift version. You must use it to indicate the version(s) of OpenShift supported by your operator.
+
+Note that the letter 'v' must be used before the version, and spaces are not allowed.
+The syntax is as follows:
+* A single version indicates that the operator is supported on that version of OpenShift or later. The operator will be automatically added to the certified catalog for all subsequent OpenShift releases.
+* A single version preceded by '=' indicates that the operator is supported ONLY on that version of OpenShift. For example, using `"=v4.8"` will add the operator to the certified catalog for OpenShift 4.8, but not for later OpenShift releases.
+* A range can be used to indicate support only for OpenShift versions within that range. For example, using `"v4.5-v4.8"` will add the operator to the certified catalog for OpenShift 4.5, 4.6 and 4.7 but not for OpenShift 4.9.
+
+For more details, please see [Managing OpenShift Versions](https://redhat-connect.gitbook.io/certified-operator-guide/ocp-deployment/operator-metadata/bundle-directory/managing-openshift-versions) in the Certified Operator Build Guide.
+
+
 
 ## <a id="pull-request"></a>Step 3: Create a Pull Request
 The final step is to create a Pull Request against the https://github.com/redhat-openshift-ecosystem/certified-operators repo. 
