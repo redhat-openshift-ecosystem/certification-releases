@@ -92,7 +92,7 @@ The syntax is as follows:
 
 For more details, please see [Managing OpenShift Versions](https://redhat-connect.gitbook.io/certified-operator-guide/ocp-deployment/operator-metadata/bundle-directory/managing-openshift-versions) in the Certified Operator Build Guide.
 
-
+> Note: An example Operator Bundle can be found [here](https://github.com/opdev/simple-demo-pipeline/tree/main/operators/simple-demo-operator).
 
 ## <a id="pull-request"></a>Step 3: Create a Pull Request
 The final step is to create a Pull Request against the https://github.com/redhat-openshift-ecosystem/certified-operators repo. 
