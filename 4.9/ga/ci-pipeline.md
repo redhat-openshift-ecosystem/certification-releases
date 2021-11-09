@@ -72,6 +72,8 @@ marketplace.openshift.io/remote-workflow: https://marketplace.redhat.com/en-us/o
  
 marketplace.openshift.io/support-workflow:https://marketplace.redhat.com/en-us/operators/\{package_name}/support?utm_source=openshift_console
 ```
+If you are updating an existing Red Hat Marketplace Operator bundle in the [RHM Operator repository](https://github.com/redhat-openshift-ecosystem/redhat-marketplace-operators), your package name must be consistent with the existing folder name you see for your Operator. For Marketplace bundles, you will need to manually add `-rhmp` to your package name. Previously, this was done automatically and therefore will not impact customer upgrades when manually changed. 
+
 *ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
 
 You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
