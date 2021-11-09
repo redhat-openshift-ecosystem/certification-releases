@@ -51,6 +51,18 @@ Find the folder for your Operator under the `operators` directory. This is where
       │       └── annotations.yaml
       └── ci.yaml
 ```
+*config.yaml*: This file should include the organization you are targeting for distribution of your Operator. The value should be either `certified-operators` or `redhat-marketplace`. See the example below:
+``` bash
+organization: certified-operators
+```
+
+Please Note: If you are targeting your Operator for Red Hat Marketplace distribution, you must include the following annotations in your clusterserviceversion.yaml:
+``` bash
+marketplace.openshift.io/remote-workflow: https://marketplace.redhat.com/en-us/operators/
+{package_name}/pricing?utm_source=openshift_console
+ 
+marketplace.openshift.io/support-workflow:https://marketplace.redhat.com/en-us/operators/\{package_name}/support?utm_source=openshift_console
+```
 
 ### Step 2b: If this is the first time this Operator has been certified
 If this Operator does not already have a subdirectory under the `operators` parent directory then you will need to create one. Use the illustration above as an example of the expected directory structure. 
