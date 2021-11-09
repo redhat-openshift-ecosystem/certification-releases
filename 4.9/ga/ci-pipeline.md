@@ -65,6 +65,13 @@ The certification pipeline expects you to have the source files for your Operato
 organization: certified-operators
 ```
 
+Please Note: If you are targeting your Operator for Red Hat Marketplace distribution, you must include the following annotations in your clusterserviceversion.yaml:
+``` bash
+marketplace.openshift.io/remote-workflow: https://marketplace.redhat.com/en-us/operators/
+{package_name}/pricing?utm_source=openshift_console
+ 
+marketplace.openshift.io/support-workflow:https://marketplace.redhat.com/en-us/operators/\{package_name}/support?utm_source=openshift_console
+```
 *ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
 
 You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
