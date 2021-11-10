@@ -131,7 +131,7 @@ Once your pull request is created it will trigger the Red Hat hosted pipeline an
 * The Package name of your Operator, should be used as the directory name you created under `operators`.  This package name should match the `package` annotation in the `annotations.yaml` file. This package name should also match the prefix of the clusterserviceversion.yaml filename.  
 * Your pull requests should only modify files in a single Operator version directory.  Do not attempt to combine updates to multiple versions nor updates across multiple Operators. 
 * The version indicator used to name your version directory should match the version indicator used in the title of the pull request. 
-* Image tags are not accepted only SHA digest.  Replace all references to image tags with the corresponding SHA digest. 
+* Image tags are not accepted only SHA digest.  [Replace all references to image tags](troubleshooting.md#pinning) with the corresponding SHA digest. 
 
 
 
