@@ -165,6 +165,8 @@ Upon completion the Pipeline can automatically open a Pull Request to submit you
 oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github token>
 ```
 
+This GitHub personal access token should have the `Repo` scope added and all the sub-scopes under `Repo`.  Scopes can be added from the GitHub user interface. 
+
 #### <a id="container-api-key"></a>Add Red Hat Container API access key
 This API access key is specifically related to your unique partner account for Red Hat Connect portal. Instructions to obtain your API key can be found: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-b---get-api-key). 
 ```bash

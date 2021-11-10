@@ -1,6 +1,14 @@
 # Troubleshooting the Operator Cert Pipeline
 
 ## Table of Contents
+
+
+### [Manual Pull Request (Red Hat Tested)](#manual)
+* [PR Title](#pr-title)
+* [Authorized GitHub Usernames](#auth-gh-users)
+* [Package Name](#pkg-name)
+* [Digest Pinning](#pinning)
+### [Automated Pull Request (Tested on Partner Premise)](#automated)
 * [Use the latest Pipeline code](#latest-code)
 * [Fork the Production GitHub repo](#fork-prod)
 * [Get a clean kubeconfig](#clean-kubeconfig)
@@ -8,6 +16,63 @@
 * [Support multiple container registries / Registry access errors](#multiple-registries)
 * [Cannot find CSV](#cannot-find-csv)
 * [Get a Red Hat Registry Service Account token](#fork-prod)
+* [Verify Pinned Digest Failed](#pin-failed)
+
+
+# <a id="manual"></a>Manual Pull Request *(Red Hat Tested)*
+
+## <a id="pr-title"></a>Pull Request Title
+When creating a pull request manually the title of your pull request must follow a predefined format. 
+
+| Prefix | Package Name | Version |
+|--------|--------------|---------|
+| The word `operator` | Operator package name | Version in parenthesis. A `v` prefix is suggested|
+
+### Examples
+`operator simple-demo-operator (v0.0.0)`
+
+`operator hello-world-certified (v.1.2.3)`
+
+`operator my-operator (3.2.1)`
+
+## <a id="auth-gh-users"></a>Authorized GitHub Usernames
+Any GitHub `username` or GitHub `organization` used to submit a pull request must be entered in the GitHub Authorized Users field on the Project settings page in connect.redhat.com.
+
+| Fork URL | User or Org |
+|----------|-------------|
+| `https://github.com/my-github-user/certified-operators.git` | my-github-user |
+| `https://github.com/my-github-organization/certified-operators.git` | my-github-organization |
+| `https://github.com/my-github-user/redhat-marketplace-operators.git` | my-github-user |
+| `https://github.com/my-github-organization/redhat-marketplace-operators.git` | my-github-organization |
+
+Once you have your GitHub username or organization identified follow the instructions below to add it to Connect
+
+1. Navigate to [connect.redhat.com](https://connect.redhat.com/)
+2. Click the `Login` button
+3. Click the `Log in for technology partners` button
+4. Click `Product Certification` > `Manage certification projects`
+5. Click on the Project link for your Operator Bundle Image
+6. Click on the `settings` tab
+7. Add your GitHub users/organizations to the `Authorized GitHub user accounts` field. 
+![Auth GH Users](assets/AuthGHUsers.png)
+
+## <a id="pkg-name"></a>Package Name
+Your Operator's package name must be used consistently in three areas
+
+| Package |
+|--------------|
+| Name of your folder under the `operators` directory in your fork |
+| Value of the `operators.operatorframework.io.bundle.package.v1` annotation in `annotations.yaml` |
+| Prefix of the filename for your `clusterserviceversion.yaml` file |
+
+## <a id="pinning"></a>Digest Pinning
+All images referenced in your Operator Bundle must reference SHA digest and not tags. The existance of tags in your bundle will cause a certification failure Replace all image tags with image digests. 
+
+| Unpinned Example | Pinned Example |
+|----------|--------|
+| `quay.io/my_repo/my_image:v1.0.0` | `quay.io/my_repo/my_image@sha256:fd8d827d4d345ec327cb92d30086a17a2e08ba9c3163db4a25bfe2512123fd6a` |
+
+# <a id="automated"></a>Automated Pull Request *(Tested on Partner Premise)*
 
 ## <a id="latest-code"></a>Make sure you are using the latest version of the Pipeline
 As the Pipeline is updated with fixes and enhancements you want to make sure you are using the latest version. 
@@ -141,3 +206,21 @@ And a token.
 `eyJhbGc.................`
 
 With the username and the token as your password you can follow the instructions for [supporting mupltiple registries](#multiple-registries). 
+
+
+## <a id="pin-failed"></a>Verify Pinned Digest Step Fails 
+Digest pinning will create a pinned version of your CSV that uses SHA Digest for all images. Your manually pinned CSV must match exactly, as tested by `git diff --stat`, what is created by the Digest Pinning tool. Sometimes the Digest Pinning Tool may add duplicate entries using different names in the relatedImages section. 
+
+If you are using the CI Pipeline adding `--param pin_digest=true` will avoid this issue.  If you are submitting a PR manually you may hit this issue. 
+
+## 404 Error when attempting to open a PR with the CI Pipeline
+* Make sure you have a secret named github-api-secret that contains a GitHub personal access token
+* Make sure the GitHub personal access token has the `Repo` scope selected, which should also select all scopes under `Repo`
+``` 
+repo Full control of private repositories
+        repo:status Access commit status
+        repo_deployment Access deployment status
+        public_repo Access public repositories
+        repo:invite Access repository invitations
+        security_events Read and write security events
+ ```

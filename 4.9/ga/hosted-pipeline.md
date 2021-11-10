@@ -8,7 +8,7 @@
 
 ## Table of Contents
 * [Before you start](#before-you-start)
-* [Step 1: Fork the Certified Operators Repo](#fork)
+* [Step 1: Fork the Upstream Repo](#fork)
 * [Step 2: Add your Operator Bundle](#add-bundle)
 * [Step 3: Create a Pull Request](#pull-request)
 * [Reminders](#reminders)
@@ -17,12 +17,18 @@
 
 ## <a id="before-you-start"></a>Before you start
 * Complete the Project checklist in connect.redhat.com
-* Add your GitHub username to the list of authorized GitHub users in connect.reddhat.com under the Project settings page. 
+* Add your GitHub username to the list of authorized GitHub users in connect.redhat.com under the Project settings page. 
 * Add a docker config.json secret to connect.redhat.com under the Project settings page in the YAML field if you are using a private container registry
 
-## <a id="fork"></a>Step 1: Fork the Certified Operators Repo
-The Certified Operator repo is located at: 
-https://github.com/redhat-openshift-ecosystem/certified-operators
+## <a id="fork"></a>Step 1: Fork the Upstream Repo
+Based upon the Catalog(s) that you are targeting for distribution, fork the appropriate repo(s) from the table below:
+
+| Catalog             | Upstream Repo |
+|-------------------- |---------------------------------------------------------------------------|
+| Certfied Catalog    | https://github.com/redhat-openshift-ecosystem/certified-operators |
+| Red Hat Marketplace | https://github.com/redhat-openshift-ecosystem/redhat-marketplace-operators |
+
+> If you intend to publish in multiple catalogs, you will need to fork each catalog and complete the certification once for each fork. 
 
 If you are not familiar with creating a fork in GitHub [you can find instructions here](https://docs.github.com/en/get-started/quickstart/fork-a-repo). 
 
@@ -95,10 +101,18 @@ For more details, please see [Managing OpenShift Versions](https://redhat-connec
 > Note: An example Operator Bundle can be found [here](https://github.com/opdev/simple-demo-pipeline/tree/main/operators/simple-demo-operator).
 
 ## <a id="pull-request"></a>Step 3: Create a Pull Request
-The final step is to create a Pull Request against the https://github.com/redhat-openshift-ecosystem/certified-operators repo. 
+The final step is to create a Pull Request against the targeted upstream repo. 
+
+| Catalog             | Upstream Repo |
+|-------------------- |---------------------------------------------------------------------------|
+| Certfied Catalog    | https://github.com/redhat-openshift-ecosystem/certified-operators |
+| Red Hat Marketplace | https://github.com/redhat-openshift-ecosystem/redhat-marketplace-operators |
+
+> If you intend to publish in multiple catalogs, you will create a pull request for each target catalog. 
 
 If you are not familiar with creating a pull request in GitHub you can [find instructions here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork). 
 
+#### Note
 The title of your pull request must conform to the following format.  
 
 ```
@@ -107,7 +121,7 @@ operator my-operator (v1.4.6)
 
 It should begin with the word `operator` followed by your Operator Package name, followed by the version number in parenthesis. 
 
-Once this PR is created it will trigger the Red Hat hosted pipeline and provide an update via a PR comment once it has failed or completed. 
+Once your pull request is created it will trigger the Red Hat hosted pipeline and provide an update via a PR comment once it has failed or completed. 
 
 
 ## <a id="reminders"></a>Reminders
@@ -116,6 +130,8 @@ Once this PR is created it will trigger the Red Hat hosted pipeline and provide 
 * Once a PR has been successfully merged it can not be changed.  You will need to bump the version of your Operator and open a new PR. 
 * The Package name of your Operator, should be used as the directory name you created under `operators`.  This package name should match the `package` annotation in the `annotations.yaml` file. This package name should also match the prefix of the clusterserviceversion.yaml filename.  
 * Your pull requests should only modify files in a single Operator version directory.  Do not attempt to combine updates to multiple versions nor updates across multiple Operators. 
+* The version indicator used to name your version directory should match the version indicator used in the title of the pull request. 
+* Image tags are not accepted only SHA digest.  Replace all references to image tags with the corresponding SHA digest. 
 
 
 
