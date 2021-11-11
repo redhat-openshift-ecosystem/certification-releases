@@ -54,6 +54,7 @@ Once you have your GitHub username or organization identified follow the instruc
 5. Click on the Project link for your Operator Bundle Image
 6. Click on the `settings` tab
 7. Add your GitHub users/organizations to the `Authorized GitHub user accounts` field. 
+
 ![Auth GH Users](assets/AuthGHUsers.png)
 
 ## <a id="pkg-name"></a>Package Name
