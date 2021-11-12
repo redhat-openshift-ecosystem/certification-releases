@@ -2,12 +2,42 @@
 
 ## Table of Contents
 
-
 ### [Manual Pull Request (Red Hat Tested)](#manual)
-* [PR Title](#pr-title)
-* [Authorized GitHub Usernames](#auth-gh-users)
-* [Package Name](#pkg-name)
-* [Digest Pinning](#pinning)
+* [set-github-status-pending](#set-github-status-pending)
+* [set-env](#set-env)
+* [checkout](#checkout)
+* [validate-pr-title](#validate-pr-title)
+* [get-bundle-path](#get-bundle-path)
+* [bundle-path-validation](#bundle-path-validation)
+* [certification-project-check](#certification-project-check)
+* [content-hash](#content-hash)
+* [create-support-link-for-pr](#create-support-link-for-pr)
+* [get-cert-project-related-data](#get-cert-project-related-data)
+* [submission-validation](#submission-validation)
+* [merge-registry-credentials](#merge-registry-credentials)
+* [update-cert-project-status](#update-cert-project-status)
+* [reserve-operator-name](#reserve-operator-name)
+* [get-supported-versions](#get-supported-versions)
+* [annotations-validation](#annotations-validation)
+* [digest-pinning](#digest-pinning)
+* [verify-changed-directories](#verify-changed-directories)
+* [yaml-lint](#yaml-lint)
+* [verify-pinned-digest](#verify-pinned-digest)
+* [dockerfile-creation](#dockerfile-creation)
+* [build-bundle](#build-bundle)
+* [generate-index](#generate-index)
+* [make-bundle-repo-public](#make-bundle-repo-public)
+* [build-index](#build-index)
+* [make-index-repo-public](#make-index-repo-public)
+* [get-ci-results-attempt](#get-ci-results-attempt)
+* [preflight-trigger](#preflight-trigger)
+* [upload-artifacts](#upload-artifacts])
+* [get-ci-results](#get-ci-results)
+* [link-pull-request](#link-pull-request)
+* [verify-ci-results](#verify-ci-results)
+* [query-publishing-checklist](#query-publishing-checklist)
+* [merge-pr](#merge-pr)
+
 ### [Automated Pull Request (Tested on Partner Premise)](#automated)
 * [Use the latest Pipeline code](#latest-code)
 * [Fork the Production GitHub repo](#fork-prod)
@@ -21,12 +51,25 @@
 
 # <a id="manual"></a>Manual Pull Request *(Red Hat Tested)*
 
-## <a id="pr-title"></a>Pull Request Title
+## <a id="set-github-status-pending"></a>set-github-status-pending
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="set-env"></a>set-env
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="checkout"></a>checkout
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="validate-pr-title"></a>validate-pr-title
+### <a id="pr-title"></a>Pull Request Title
 When creating a pull request manually the title of your pull request must follow a predefined format. 
 
 | Prefix | Package Name | Version |
 |--------|--------------|---------|
-| The word `operator` | Operator package name | Version in parenthesis. A `v` prefix is suggested|
+| The word `operator` | Operator package name | Version in parenthesis. A `v` prefix is suggested.|
+
+> Note: The version in your PR Title must match the version directory in your Operator Bundle.  
+> If you use the `v` prefix in your PR title it must also be used when naming your version directory. 
 
 ### Examples
 `operator simple-demo-operator (v0.0.0)`
@@ -35,7 +78,28 @@ When creating a pull request manually the title of your pull request must follow
 
 `operator my-operator (3.2.1)`
 
-## <a id="auth-gh-users"></a>Authorized GitHub Usernames
+
+
+## <a id="get-bundle-path"></a>get-bundle-path
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="bundle-path-validation"></a>bundle-path-validation
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="certification-project-check"></a>certification-project-check
+This step confirms that your `ci.yaml` contains a `cert_project_id` value. 
+
+## <a id="content-hash"></a>content-hash
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="create-support-link-for-pr"></a>create-support-link-for-pr
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="get-cert-project-related-data"></a>get-cert-project-related-data
+## <a id="submission-validation"></a>submission-validation
+You may only have one open Pull Request at a time. Attempting to open a second PUll request while one is still open will result in a failure here. 
+
+### <a id="auth-gh-users"></a>Authorized GitHub Usernames
 Any GitHub `username` or GitHub `organization` used to submit a pull request must be entered in the GitHub Authorized Users field on the Project settings page in connect.redhat.com.
 
 | Fork URL | User or Org |
@@ -57,6 +121,121 @@ Once you have your GitHub username or organization identified follow the instruc
 
 ![Auth GH Users](assets/AuthGHUsers.png)
 
+## <a id="merge-registry-credentials"></a>merge-registry-credentials
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="update-cert-project-status"></a>update-cert-project-status
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="reserve-operator-name"></a>reserve-operator-name
+This step will make sure that the package name of our Operator belongs to your `cert_project_id`. This step will fail if another `cert_project_id` has laid claim to the package name used in this Pull Request. 
+
+## <a id="get-supported-versions"></a>get-supported-versions
+Failures at this step may be caused by several issues
+
+> If you also have a failure at the `annotations-validation` step, you should [resolve](#annotation-validation) the `annotation-validation` issues first and then retry. It's possible that this will resolve failures at this step as well. 
+
+* Your `annotations.yaml` file needs to include an `com.redhat.openshift.versions` annotation indicating the OpenShift versions supported by your Operator.  
+* The filename for your `clusterserviceversion.yaml` must be prefixed with your Operator's package name. 
+* The value of your `operators.operatorframework.io.bundle.package.v1` annotation in the `annotations.yaml` must equal your Operator's package name. 
+
+## <a id="annotations-validation"></a>annotations-validation
+The version used in your Pull Request title will be the version directory used to look up your `annotations.yaml` file. A common mistake is to use a `v` in the version of your PR title without also using a `v` prefix for the version folder in your Operator Bundle. 
+
+| Pull Request Title | Version directory name |
+|------------------------------------------|----------|
+| `operator simple-demo-operator (v1.2.3)` | `v1.2.3` |
+| `operator simple-demo-operator (1.2.3)`  | `1.2.3`  |
+
+
+## <a id="digest-pinning"></a>digest-pinning
+
+> If you also have a failure at the `annotations-validation` step, you should [resolve](#annotation-validation) the `annotation-validation` issues first and then retry. It's possible that this will resolve failures at this step as well. 
+
+### <a id="pinning"></a>
+All images referenced in your Operator Bundle must reference SHA digest and not tags. The existance of tags in your bundle will cause a certification failure Replace all image tags with image digests. 
+
+| Unpinned Example | Pinned Example |
+|----------|--------|
+| `quay.io/my_repo/my_image:v1.0.0` | `quay.io/my_repo/my_image@sha256:fd8d827d4d345ec327cb92d30086a17a2e08ba9c3163db4a25bfe2512123fd6a` |
+
+## <a id="verify-changed-directories"></a>verify-changed-directories
+Your Pull Request should only add files and not modify any files that have already been merged.  Make sure files changed reside in a single version directory that matches the version used in the title of your Pull Request
+
+## <a id="yaml-lint"></a>yaml-lint
+> If you also have a failure at the `annotations-validation` step, you should [resolve](#annotation-validation) the `annotation-validation` issues first and then retry. It's possible that this will resolve failures at this step as well. 
+
+**Wornings** at this step should be addressed if possible but won't result in a failure.  
+**Errors** at this step will need to be addressed.  Often errors center around unexpected whitespace at the end of lines or missing new lines at the end of your `yaml` files. 
+
+## <a id="verify-pinned-digest"></a>verify-pinned-digest
+See [Digest Pinning](#digest-pinning)
+
+This step checks to ensure that all your container images are using SHA digests instead of tags.  
+This step also check for the existance of a `spec.relatedImages` section in your Cluster Service Version (CSV). 
+
+More information on formatting `clusterserviceversion.yaml` files can be found [here](https://docs.openshift.com/container-platform/4.9/operators/operator_sdk/osdk-generating-csvs.html).
+
+## <a id="dockerfile-creation"></a>dockerfile-creation
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="build-bundle"></a>build-bundle
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="generate-index"></a>generate-index
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="make-bundle-repo-public"></a>make-bundle-repo-public
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="build-index"></a>build-index
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="make-index-repo-public"></a>make-index-repo-public
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="get-ci-results-attempt"></a>get-ci-results-attempt
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="preflight-trigger"></a>preflight-trigger
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="upload-artifacts"></a>upload-artifacts
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="get-ci-results"></a>get-ci-results
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="link-pull-request"></a>link-pull-request
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="verify-ci-results"></a>verify-ci-results
+Issues at this step typically point to falures in the Preflight checks which confirm your Operators adhearance to the certification policy. There may be additional logs available at connect.redhat.com listed on the Test Results page for your Project. 
+
+Failures here may be caused by multiple issues
+* In your CSV (clusterserviceversion.yaml) ensure that your `alm-examples` annotation is correct. Look out for incorrect spacing or tabs which may inadvertantly include other annotations under `alm-examples`
+* In `alm-examples` make sure all your CRs have a `spec` block.
+* Failure here may indicate that we were unable to deploy your Operator using the Operator Lifecycle Manager (OLM)
+
+## <a id="query-publishing-checklist"></a>query-publishing-checklist
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+## <a id="merge-pr"></a>merge-pr
+Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+
+
+
+
+
+
+
+
+
+<hr>
+
+
+
 ## <a id="pkg-name"></a>Package Name
 Your Operator's package name must be used consistently in three areas
 
@@ -66,12 +245,7 @@ Your Operator's package name must be used consistently in three areas
 | Value of the `operators.operatorframework.io.bundle.package.v1` annotation in `annotations.yaml` |
 | Prefix of the filename for your `clusterserviceversion.yaml` file |
 
-## <a id="pinning"></a>Digest Pinning
-All images referenced in your Operator Bundle must reference SHA digest and not tags. The existance of tags in your bundle will cause a certification failure Replace all image tags with image digests. 
 
-| Unpinned Example | Pinned Example |
-|----------|--------|
-| `quay.io/my_repo/my_image:v1.0.0` | `quay.io/my_repo/my_image@sha256:fd8d827d4d345ec327cb92d30086a17a2e08ba9c3163db4a25bfe2512123fd6a` |
 
 # <a id="automated"></a>Automated Pull Request *(Tested on Partner Premise)*
 
