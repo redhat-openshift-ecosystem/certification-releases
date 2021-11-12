@@ -252,6 +252,24 @@ Your Operator's package name must be used consistently in three areas
 ## <a id="latest-code"></a>Make sure you are using the latest version of the Pipeline
 As the Pipeline is updated with fixes and enhancements you want to make sure you are using the latest version. 
 
+### Soft reload of the Pipeline using `oc apply`
+```bash
+git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
+cd operator-pipelines
+oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
+oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
+```
+
+### Hard reload of the Pipeline using `oc delete` and `oc create`
+```bash
+git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
+cd operator-pipelines
+oc delete -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
+oc delete -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
+oc create -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
+oc create -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
+```
+
 ## <a id="fork-prod"></a>Make sure we are using Production
 Partners who were a part of the alpha testing and beta testing may still be using GitHub forks of the `preprod` repos.  Make sure you are now using the production repo for your GitHub fork. 
 
@@ -271,23 +289,7 @@ In addition your `tkn` command should reference the production environments
 
 
 
-### Soft reload of the Pipeline using `oc apply`
-```bash
-git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
-cd operator-pipelines
-oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
-oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
-```
 
-### Hard reload of the Pipeline using `oc delete` and `oc create`
-```bash
-git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
-cd operator-pipelines
-oc delete -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
-oc delete -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
-oc create -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
-oc create -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
-```
 
 ## <a id="clean-kubeconfig"></a>Get a clean kubeconfig
 The Kubeconfig you are using may contain multiple contexts with certs for multiple clusters. If you try to use that kubeconfig as is it may cause issues on your OpenShift cluster. To make sure you are using a clean kubeconfig targeting your Openshift CI Cluster use the script below. 
