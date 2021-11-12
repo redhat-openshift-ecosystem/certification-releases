@@ -153,7 +153,7 @@ The version used in your Pull Request title will be the version directory used t
 > If you also have a failure at the `annotations-validation` step, you should [resolve](#annotation-validation) the `annotation-validation` issues first and then retry. It's possible that this will resolve failures at this step as well. 
 
 ### <a id="pinning"></a>
-All images referenced in your Operator Bundle must reference SHA digest and not tags. The existance of tags in your bundle will cause a certification failure Replace all image tags with image digests. 
+All images referenced in your Operator Bundle must reference SHA digest and not tags. The existence of tags in your bundle will cause a certification failure Replace all image tags with image digests. 
 
 | Unpinned Example | Pinned Example |
 |----------|--------|
@@ -165,14 +165,14 @@ Your Pull Request should only add files and not modify any files that have alrea
 ## <a id="yaml-lint"></a>yaml-lint
 > If you also have a failure at the `annotations-validation` step, you should [resolve](#annotation-validation) the `annotation-validation` issues first and then retry. It's possible that this will resolve failures at this step as well. 
 
-**Wornings** at this step should be addressed if possible but won't result in a failure.  
-**Errors** at this step will need to be addressed.  Often errors center around unexpected whitespace at the end of lines or missing new lines at the end of your `yaml` files. 
+**Warnings** at this step should be addressed if possible but won't result in a failure.  
+**Errors** at this step will need to be addressed.  Often errors center around unexpected whitespace at the end of lines or missing newlines at the end of your `yaml` files. 
 
 ## <a id="verify-pinned-digest"></a>verify-pinned-digest
 See [Digest Pinning](#digest-pinning)
 
 This step checks to ensure that all your container images are using SHA digests instead of tags.  
-This step also check for the existance of a `spec.relatedImages` section in your Cluster Service Version (CSV). 
+This step also checks for the existence of a `spec.relatedImages` section in your Cluster Service Version (CSV). 
 
 More information on formatting `clusterserviceversion.yaml` files can be found [here](https://docs.openshift.com/container-platform/4.9/operators/operator_sdk/osdk-generating-csvs.html).
 
@@ -210,10 +210,10 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="verify-ci-results"></a>verify-ci-results
-Issues at this step typically point to falures in the Preflight checks which confirm your Operators adhearance to the certification policy. There may be additional logs available at connect.redhat.com listed on the Test Results page for your Project. 
+Issues at this step typically point to failures in the Preflight checks which confirm your Operators adherence to the certification policy. There may be additional logs available at connect.redhat.com listed on the Test Results page for your Project. 
 
 Failures here may be caused by multiple issues
-* In your CSV (clusterserviceversion.yaml) ensure that your `alm-examples` annotation is correct. Look out for incorrect spacing or tabs which may inadvertantly include other annotations under `alm-examples`
+* In your CSV (clusterserviceversion.yaml) ensure that your `alm-examples` annotation is correct. Look out for incorrect spacing or tabs which may inadvertently include other annotations under `alm-examples`
 * In `alm-examples` make sure all your CRs have a `spec` block.
 * Failure here may indicate that we were unable to deploy your Operator using the Operator Lifecycle Manager (OLM)
 
@@ -253,7 +253,7 @@ Your Operator's package name must be used consistently in three areas
 As the Pipeline is updated with fixes and enhancements you want to make sure you are using the latest version. 
 
 ## <a id="fork-prod"></a>Make sure we are using Production
-Partners who were apart of the alpha testing and beta testing may still be using GitHub forks of the `preprod` repos.  Make sure you are now using the production repo for your GitHub fork. 
+Partners who were a part of the alpha testing and beta testing may still be using GitHub forks of the `preprod` repos.  Make sure you are now using the production repo for your GitHub fork. 
 
 > Prod Repo is https://github.com/redhat-openshift-ecosystem/certified-operators
 
@@ -303,7 +303,7 @@ oc create secret generic kubeconfig --from-file=kubeconfig=$KUBECONFIG
 > Use GitHub SSH URL or set .gitconfig to enforce SSH
 
 ## <a id="multiple-registries"></a>Add access to multiple container registries. 
-If you are leveraging multiple container registries you will likely need to provide credentials for each. The sample script below can be modified to accommadate X number of registries
+If you are leveraging multiple container registries you will likely need to provide credentials for each. The sample script below can be modified to accommodate X number of registries
 
 This issue is most often seen in the Digest Pinning task and the Build Index task. If you are seeing errors indicating registry access issues, the following might resolve it. 
 
@@ -354,7 +354,7 @@ EOF
 ## <a id="cannot-find-csv"></a>Cannot find CSV file
 Make sure the `package` annotation in your `annotations.yaml` file matches the prefix of the clusterserviceversion.yaml filename.  
 
-For example if my Operator is called `simple-demo-operator` then the follwing should be set to:
+For example if my Operator is called `simple-demo-operator` then the following should be set to:
 1. metadata/annotations.yaml
 ```bash
 ...
@@ -369,7 +369,7 @@ operators.operatorframework.io.bundle.package.v1: simple-demo-operator**
 
 https://access.redhat.com/RegistryAuthentication#creating-registry-service-accounts-6
 
-### Create a Registry Service Acount
+### Create a Registry Service Account
 https://access.redhat.com/terms-based-registry/
 
 Upon creating a Registry Service Account you will be given a username similar to the one below
@@ -380,7 +380,7 @@ And a token.
 
 `eyJhbGc.................`
 
-With the username and the token as your password you can follow the instructions for [supporting mupltiple registries](#multiple-registries). 
+With the username and the token as your password you can follow the instructions for [supporting multiple registries](#multiple-registries). 
 
 
 ## <a id="pin-failed"></a>Verify Pinned Digest Step Fails 
