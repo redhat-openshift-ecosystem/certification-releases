@@ -96,6 +96,9 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="get-cert-project-related-data"></a>get-cert-project-related-data
+Make sure you have included the Authorized GitHub Usernames in Connect
+See more detail [here](#auth-gh-users).
+
 ## <a id="submission-validation"></a>submission-validation
 You may only have one open Pull Request at a time. Attempting to open a second PUll request while one is still open will result in a failure here. 
 
@@ -189,7 +192,10 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="build-index"></a>build-index
-Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+Failures at this step are uncommon and if they do occure they are often transient.  
+
+Please click the `Close pull request` button in GitHub then click the `Reopen pull request` button.
+Closing and re-opening your Pull request will restart the Pipeline. If your PR fails at this step twice in a row please contact Red Hat Support
 
 ## <a id="make-index-repo-public"></a>make-index-repo-public
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
@@ -199,6 +205,8 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 
 ## <a id="preflight-trigger"></a>preflight-trigger
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+
+> There is a known issue if you Operator only supports OpenShift 4.7 or below. In this case we recommend using the CI Pipeline.
 
 ## <a id="upload-artifacts"></a>upload-artifacts
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
@@ -218,7 +226,7 @@ Failures here may be caused by multiple issues
 * Failure here may indicate that we were unable to deploy your Operator using the Operator Lifecycle Manager (OLM)
 
 ## <a id="query-publishing-checklist"></a>query-publishing-checklist
-Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+Failures here usually point to an incomplete Checklist item.  Please login to connect.redhat.com and complete all the items listed under the Project publishing checklist. 
 
 ## <a id="merge-pr"></a>merge-pr
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
