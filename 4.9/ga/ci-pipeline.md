@@ -84,8 +84,8 @@ Once you have the contents of your Operator bundle structured properly,
 * Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators
 * git clone your fork of the certified-operators repo
 * Add the contents of your Operator bundle to `operators` directory in your fork 
-* Now run $git add <bundle-name> . 
-* Commit changes with $git commit -m "<message>" and push the changes with $git push -u origin main 
+* Add the operator bundle by running $git add <bundle-name> . 
+* Commit changes with $git commit -m "<message>" and push the changes with $git push -u origin main  
 
 
 ## <a id="installation"></a>Installation
