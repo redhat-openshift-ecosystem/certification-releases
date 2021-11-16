@@ -152,7 +152,7 @@ oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 
 #### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
 
-Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline. 
+Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline.Instruction to create a new personal access token can be found: [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). 
 
 ```bash
 oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github token>
