@@ -162,6 +162,19 @@ All images referenced in your Operator Bundle must reference SHA digest and not 
 |----------|--------|
 | `quay.io/my_repo/my_image:v1.0.0` | `quay.io/my_repo/my_image@sha256:fd8d827d4d345ec327cb92d30086a17a2e08ba9c3163db4a25bfe2512123fd6a` |
 
+In addition your clusterserviceversion.yaml must include a `relatedImages` section. This section should implement a format similar to the one below. 
+
+```
+...
+spec:
+  relatedImages: 
+    - name: etcd-operator 
+      image: quay.io/etcd-operator/operator@sha256:d134a9865524c29fcf75bbc4469013bc38d8a15cb5f41acfddb6b9e492f556e4 
+    - name: etcd-image
+      image: quay.io/etcd-operator/etcd@sha256:13348c15263bd8838ec1d5fc4550ede9860fcbb0f843e48cbccec07810eebb68
+...
+```
+
 ## <a id="verify-changed-directories"></a>verify-changed-directories
 Your Pull Request should only add files and not modify any files that have already been merged.  Make sure files changed reside in a single version directory that matches the version used in the title of your Pull Request
 
