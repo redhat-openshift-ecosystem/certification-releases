@@ -69,6 +69,8 @@ marketplace.openshift.io/remote-workflow: https://marketplace.redhat.com/en-us/o
  
 marketplace.openshift.io/support-workflow:https://marketplace.redhat.com/en-us/operators/\{package_name}/support?utm_source=openshift_console
 ```
+Please Note: Your package name must be consistent with the existing folder name you see for your Operator. For Marketplace bundles, you will need to manually add “-rhmp” to your package name. Previously, this was done automatically and therefore will not impact customer upgrades when manually changed. 
+
 
 ### Step 2b: If this is the first time this Operator has been certified
 If this Operator does not already have a subdirectory under the `operators` parent directory then you will need to create one. Use the illustration above as an example of the expected directory structure. 
