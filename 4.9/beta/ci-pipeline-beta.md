@@ -224,7 +224,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_branch=stage \
   --param bundle_path=$BUNDLE_PATH \
   --param env=stage \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --showlog
 ```
@@ -253,7 +253,7 @@ tkn pipeline start operator-ci-pipeline \
   --param pin_digests=true \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --showlog
@@ -285,7 +285,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_email=$GIT_EMAIL \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
@@ -323,7 +323,7 @@ tkn pipeline start operator-ci-pipeline \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
   --param env=stage \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
   --showlog
@@ -351,7 +351,7 @@ tkn pipeline start operator-ci-pipeline \
   --param git_email=$GIT_EMAIL \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=pyxis-api-key,secret=pyxis-api-secret \
@@ -387,7 +387,7 @@ tkn pipeline start operator-ci-pipeline \
   --param image_namespace=$IMAGE_NAMESPACE \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators-preprod \
   --param submit=true \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
@@ -422,7 +422,7 @@ tkn pipeline start operator-ci-pipeline \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
   --param submit=true \
-  --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
+  --workspace name=pipeline,volumeClaimTemplateFile=https://raw.githubusercontent.com/openshift/pipelines-tutorial/pipelines-1.5/01_pipeline/03_persistent_volume_claim.yaml \
   --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
