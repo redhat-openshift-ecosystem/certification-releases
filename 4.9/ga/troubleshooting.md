@@ -96,6 +96,12 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="get-cert-project-related-data"></a>get-cert-project-related-data
+Make sure the `cert_project_id` in your `ci.yaml` file is formatted correctely. 
+
+`cert_project_id: 6804256accf2367227abc887612ffc5567`
+
+> Note: Do not include the `ospid-` prefix and remove any dashes/hyphens 
+
 Make sure you have included the Authorized GitHub Usernames in Connect
 See more detail [here](#auth-gh-users).
 
