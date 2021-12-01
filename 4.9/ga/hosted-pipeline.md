@@ -32,31 +32,45 @@ Based upon the Catalog(s) that you are targeting for distribution, fork the appr
 
 If you are not familiar with creating a fork in GitHub [you can find instructions here](https://docs.github.com/en/get-started/quickstart/fork-a-repo). 
 
-
 ## <a id="add-bundle"></a>Step 2: Add your Operator Bundle
 In the `operators` directory of your fork there are a series of subdirectories. 
 
-* If you have certified this Operator before proceed to Step 2a
-* If this is your first time certifying this Operator proceed to Step 2b
+### If you have certified this Operator before
 
-### Step 2a: If you have certified this Operator before
-Find the folder for your Operator under the `operators` directory. This is where you will place the contents of your Operator Bundle. The example below illustrates the expected directory structure. 
+Find the folder for your Operator under the `operators` directory. This is where you will place the contents of your Operator Bundle.
+
+Please Note: Your package name must be consistent with the existing folder name you see for your Operator. For Marketplace bundles, you will need to manually add “-rhmp” to your package name. Previously, this was done automatically and therefore will not impact customer upgrades when manually changed. 
+
+### If this is the first time this Operator has been certified
+
+If this Operator does not already have a subdirectory under the `operators` parent directory then you will need to create one. Use the illustration above as an example of the expected directory structure. 
+
+Create a new directory under `operators`.  The name of this directory should match your Operator's package name. In our example it is `my-operator` 
+
+* Under the directory you created above, create a subdirectory representing the version number of the Operator. In our example it is `v1.4.6`
+
+* Under the version directory, add a `manifests` folder containing all your OpenShift manifests including your `clusterserviceversion.yaml`
+
+### All Operators
+
+The example below illustrates the expected directory structure. 
 
 ```bash
 ├── config.yaml
 ├── operators
   └── my-operator
       ├── v1.4.6
-      │   ├── manifests
-      │   │   ├── cache.example.com_my-operators.yaml
-      │   │   ├── my-operator-controller-manager-metrics-service_v1_service.yaml
-      │   │   ├── my-operator-manager-config_v1_configmap.yaml
-      │   │   ├── my-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml
-      │   │   └── my-operator.clusterserviceversion.yaml
-      │   └── metadata
-      │       └── annotations.yaml
+      │   ├── manifests
+      │   │   ├── cache.example.com_my-operators.yaml
+      │   │   ├── my-operator-controller-manager-metrics-service_v1_service.yaml
+      │   │   ├── my-operator-manager-config_v1_configmap.yaml
+      │   │   ├── my-operator-metrics-reader_rbac.authorization.k8s.io_v1_clusterrole.yaml
+      │   │   └── my-operator.clusterserviceversion.yaml
+      │   └── metadata
+      │       └── annotations.yaml
       └── ci.yaml
 ```
+
 *config.yaml*: This file should include the organization you are targeting for distribution of your Operator. The value should be either `certified-operators` or `redhat-marketplace`. See the example below:
 ``` bash
 organization: certified-operators
@@ -69,27 +83,21 @@ marketplace.openshift.io/remote-workflow: https://marketplace.redhat.com/en-us/o
  
 marketplace.openshift.io/support-workflow:https://marketplace.redhat.com/en-us/operators/\{package_name}/support?utm_source=openshift_console
 ```
-Please Note: Your package name must be consistent with the existing folder name you see for your Operator. For Marketplace bundles, you will need to manually add “-rhmp” to your package name. Previously, this was done automatically and therefore will not impact customer upgrades when manually changed. 
 
 
-### Step 2b: If this is the first time this Operator has been certified
-If this Operator does not already have a subdirectory under the `operators` parent directory then you will need to create one. Use the illustration above as an example of the expected directory structure. 
+*ci.yaml*: This file should include your Red Hat Technology Partner project id and the organization target for this operator. 
 
-* Create a new directory under `operators`.  The name of this directory should match your Operator's package name. In our example it is `my-operator` 
-* Add a ci.yaml file containing your `cert_project_id`
+You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
 ``` bash
 cert_project_id: "<your partner project id>"
 ```
-You can find instructions on where to find your project id: [here](https://github.com/redhat-openshift-ecosystem/certification-releases/blob/main/4.9/ga/operator-cert-workflow.md#step-a---get-project-id). 
-* Under the directory you created above, create a subdirectory representing the version number of the Operator. In our example it is `v1.4.6`
 
-* Under the version directory, add a `manifests` folder containing all your OpenShift manifests including your `clusterserviceversion.yaml`
-* Under the version directory, add a `metadata` directory including your `annotations.yaml` file. 
-* *annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
+*annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
 ```bash
-# OpenShift annotations example:
-com.redhat.openshift.versions: v4.6-v4.9
+# OpenShift annotations.
+com.redhat.openshift.versions: v4.6-v4.8
 ```
+
 The `com.redhat.openshift.versions` field, part of the metadata in the operator bundle, is used to determine whether an operator is included in the certified catalog for a given OpenShift version. You must use it to indicate the version(s) of OpenShift supported by your operator.
 
 Note that the letter 'v' must be used before the version, and spaces are not allowed.
