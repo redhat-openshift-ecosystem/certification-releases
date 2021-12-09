@@ -211,7 +211,7 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="build-index"></a>build-index
-Failures at this step are uncommon and if they do occure they are often transient.  
+Failures at this step are uncommon and if they do occur they are often transient.  
 
 Please click the `Close pull request` button in GitHub then click the `Reopen pull request` button.
 Closing and re-opening your Pull request will restart the Pipeline. If your PR fails at this step twice in a row please contact Red Hat Support
