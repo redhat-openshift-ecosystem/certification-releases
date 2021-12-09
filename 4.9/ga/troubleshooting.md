@@ -81,10 +81,10 @@ When creating a pull request manually the title of your pull request must follow
 
 
 ## <a id="get-bundle-path"></a>get-bundle-path
-Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+Failures at this step are uncommon. If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="bundle-path-validation"></a>bundle-path-validation
-Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+Failures at this step are uncommon. Please reference [this step](#validate-pr-title) to ensure your package name is consistent with your PR title. Also, please ensure your package name matches your Operator folder name. If the package name is consistent and you still experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="certification-project-check"></a>certification-project-check
 This step confirms that your `ci.yaml` contains a `cert_project_id` value. 
