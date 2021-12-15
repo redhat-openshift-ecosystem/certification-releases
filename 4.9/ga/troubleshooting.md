@@ -96,7 +96,7 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="get-cert-project-related-data"></a>get-cert-project-related-data
-Make sure the `cert_project_id` in your `ci.yaml` file is formatted correctely. 
+Make sure the `cert_project_id` in your `ci.yaml` file is formatted correctly and references the right project in your Partner Connect account. 
 
 `cert_project_id: 6804256accf2367227abc887612ffc5567`
 
@@ -106,7 +106,7 @@ Make sure you have included the Authorized GitHub Usernames in Connect
 See more detail [here](#auth-gh-users).
 
 ## <a id="submission-validation"></a>submission-validation
-You may only have one open Pull Request at a time. Attempting to open a second PUll request while one is still open will result in a failure here. 
+You may only have one open Pull Request at a time. Attempting to open a second Pull request while one is still open will result in a failure here. 
 
 ### <a id="auth-gh-users"></a>Authorized GitHub Usernames
 Any GitHub `username` or GitHub `organization` used to submit a pull request must be entered in the GitHub Authorized Users field on the Project settings page in connect.redhat.com.
@@ -140,7 +140,7 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 This step will make sure that the package name of our Operator belongs to your `cert_project_id`. This step will fail if another `cert_project_id` has laid claim to the package name used in this Pull Request. 
 
 ## <a id="get-supported-versions"></a>get-supported-versions
-Failures at this step may be caused by several issues
+Failures at this step may be caused by several issues:
 
 > If you also have a failure at the `annotations-validation` step, you should [resolve](#annotation-validation) the `annotation-validation` issues first and then retry. It's possible that this will resolve failures at this step as well. 
 
@@ -155,6 +155,8 @@ The version used in your Pull Request title will be the version directory used t
 |------------------------------------------|----------|
 | `operator simple-demo-operator (v1.2.3)` | `v1.2.3` |
 | `operator simple-demo-operator (1.2.3)`  | `1.2.3`  |
+
+Also please ensure to double check that your package naming remains consistent throughout the metadata code, particularly in the annotations.yaml file.
 
 
 ## <a id="digest-pinning"></a>digest-pinning
@@ -205,7 +207,11 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="generate-index"></a>generate-index
-Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+Failures at this step are uncommon.  
+
+If you are updating your Operator to be compatible with OpenShift v4.9, and your Operator was previously removed from the 4.9 Operator index, be sure you are following the guidance outlined [here](https://connect.redhat.com/blog/updating-operators-openshift-49). A common cause of error is to use 'replaces' to replace a version of your Operator that was removed from the index.
+
+If you still experience a failure or error at this step, contact Red Hat Support.
 
 ## <a id="make-bundle-repo-public"></a>make-bundle-repo-public
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
@@ -225,7 +231,8 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 ## <a id="preflight-trigger"></a>preflight-trigger
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
-> There is a known issue if you Operator only supports OpenShift 4.7 or below. In this case we recommend using the CI Pipeline.
+> Note: There is a known issue if you Operator only supports OpenShift 4.7 or below. In this case we recommend using the CI Pipeline.
+> Note: There is also a known issue if you indicate your supported OpenShift versions using an open-ended value (i.e. "v4.7"). This will cause a time-out error. For now, specify a range of supported versions ("v4.7-v4.9") or a specific version (i.e. "=v4.9")
 
 ## <a id="upload-artifacts"></a>upload-artifacts
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
@@ -243,6 +250,7 @@ Failures here may be caused by multiple issues
 * In your CSV (clusterserviceversion.yaml) ensure that your `alm-examples` annotation is correct. Look out for incorrect spacing or tabs which may inadvertently include other annotations under `alm-examples`
 * In `alm-examples` make sure all your CRs have a `spec` block.
 * Failure here may indicate that we were unable to deploy your Operator using the Operator Lifecycle Manager (OLM)
+* Ensure all of your related images are certified and published
 
 ## <a id="query-publishing-checklist"></a>query-publishing-checklist
 Failures here usually point to an incomplete Checklist item.  Please login to connect.redhat.com and complete all the items listed under the Project publishing checklist. 
