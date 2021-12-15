@@ -209,8 +209,6 @@ oc create -f ssh-secret.yml
 ## <a id="private-registry"></a>Optional Step - If using a private container registry
 By default the Pipeline will use the OpenShift Container Registry running in the cluster. 
 
-NOTE: There is a known bug here that is being addressed, see [here.](https://github.com/redhat-openshift-ecosystem/openshift-preflight/issues/283) Until this is corrected, please use an external registry and follow these steps:
-
 ### <a id="container-registry-creds"></a>Add credentials for the Container Registry
 The Pipeline will automatically build your Operator Bundle Image as well as a Bundle Image Index for testing and verification.  
 
