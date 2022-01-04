@@ -232,7 +232,6 @@ Failures at this step are uncommon.  If you do experience a failure or error at 
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
 > Note: There is a known issue if you Operator only supports OpenShift 4.7 or below. In this case we recommend using the CI Pipeline.
-> Note: There is also a known issue if you indicate your supported OpenShift versions using an open-ended value (i.e. "v4.7"). This will cause a time-out error. For now, specify a range of supported versions ("v4.7-v4.9") or a specific version (i.e. "=v4.9")
 
 ## <a id="upload-artifacts"></a>upload-artifacts
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
