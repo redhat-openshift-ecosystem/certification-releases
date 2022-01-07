@@ -243,10 +243,15 @@ tkn pipeline start operator-ci-pipeline \
   --param bundle_path=$BUNDLE_PATH \
   --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
   --showlog
 ```
 After running this command you will be prompted for several additional parameters. Accept all the defaults. 
+
+The following is set as default and doesn't need to be explicitly included, but can be overridden if your kubeconfig secret is created under a different name.
+```bash
+--param kubeconfig_secret_name=kubeconfig \
+--param kubeconfig_secret_key=kubeconfig
+```
 
 > #### Troubleshooting Tip
 >
@@ -272,7 +277,6 @@ tkn pipeline start operator-ci-pipeline \
   --param git_username=$GIT_USERNAME \
   --param git_email=$GIT_EMAIL \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --showlog
 ```
@@ -304,17 +308,16 @@ tkn pipeline start operator-ci-pipeline \
   --param registry=$REGISTRY \
   --param image_namespace=$IMAGE_NAMESPACE \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
-  --showlog \
+  --showlog
 
 ```
 
 # <a id="submit-result"></a>Submit Results to Red Hat
 * Execute the [Configuration Steps for Submitting Results](#step7)
 
-In order to submit results add the following `--param`'s and `--workspace` where `$UPSTREAM_REPO_NAME` is equal to the repo where the Pull Request will be submitted. Typically this is a Red Hat Certification repo but you can use a repo of your own for testing.
+In order to submit results add the following `--param`'s where `$UPSTREAM_REPO_NAME` is equal to the repo where the Pull Request will be submitted. Typically this is a Red Hat Certification repo but you can use a repo of your own for testing.
 ```bash
 --param upstream_repo_name=$UPSTREAM_REPO_NAME #Repo where Pull Request (PR) will be opened
 ```
@@ -323,8 +326,10 @@ In order to submit results add the following `--param`'s and `--workspace` where
 --param submit=true
 ```
 
+The following is set as default and doesn't need to be explicitly included, but can be overridden if your Pyxis secret is created under a different name.
 ```bash
---workspace name=pyxis-api-key,secret=pyxis-api-secret
+--param pyxis_api_key_secret_name=pyxis-api-secret \
+--param pyxis_api_key_secret_key=pyxis-api-key
 ```
 
 ## <a id="submit-result-minimal"></a>Submit results from Minimal Pipeline Run
@@ -342,8 +347,6 @@ tkn pipeline start operator-ci-pipeline \
   --param submit=true \
   --param env=prod \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
-  --workspace name=pyxis-api-key,secret=pyxis-api-secret \
   --showlog
 ```
 
@@ -370,9 +373,7 @@ tkn pipeline start operator-ci-pipeline \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
-  --workspace name=pyxis-api-key,secret=pyxis-api-secret \
   --showlog
 ```
 > #### Troubleshooting Tip
@@ -406,10 +407,8 @@ tkn pipeline start operator-ci-pipeline \
   --param upstream_repo_name=redhat-openshift-ecosystem/certified-operators \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
-  --workspace name=pyxis-api-key,secret=pyxis-api-secret \
   --showlog
 ```
 
@@ -441,9 +440,7 @@ tkn pipeline start operator-ci-pipeline \
   --param image_namespace=$IMAGE_NAMESPACE \
   --param submit=true \
   --workspace name=pipeline,volumeClaimTemplateFile=templates/workspace-template.yml \
-  --workspace name=kubeconfig,secret=kubeconfig \
   --workspace name=ssh-dir,secret=github-ssh-credentials \
   --workspace name=registry-credentials,secret=registry-dockerconfig-secret \
-  --workspace name=pyxis-api-key,secret=pyxis-api-secret \
   --showlog
 ```
