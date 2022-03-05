@@ -353,14 +353,16 @@ CRED3=$(echo -n "myuser3:mypasswd3" | base64)
 
 cat << EOF > auth.yml
 {
-        "registry1": {
-                "auth": $CRED1
-        },
-        "registry2": {
-                "auth": $CRED2
-        },
-        "registry3": {
-                "auth": $CRED3
+        "auths": {
+                "registry1": {
+                        "auth": $CRED1
+                },
+                "registry2": {
+                        "auth": $CRED2
+                },
+                "registry3": {
+                        "auth": $CRED3
+                }
         }
 
 }
