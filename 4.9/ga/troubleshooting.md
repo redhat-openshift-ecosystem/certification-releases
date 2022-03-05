@@ -355,20 +355,20 @@ cat << EOF > auth.yml
 {
         "auths": {
                 "registry1": {
-                        "auth": $CRED1
+                        "auth": "$CRED1"
                 },
                 "registry2": {
-                        "auth": $CRED2
+                        "auth": "$CRED2"
                 },
                 "registry3": {
-                        "auth": $CRED3
+                        "auth": "$CRED3"
                 }
         }
 
 }
 EOF
 
-CONFIGJSON=$(base64 ./auth.yml)
+CONFIGJSON=$(base64 auth.yml)
 
 cat << EOF > regcred.yml
 apiVersion: v1
