@@ -74,7 +74,11 @@ preflight check container registry.example.org/your-namespace/your-image:sometag
   --docker-config=/path/to/your/dockerconfig
   ```
 
-Once you submit your test results, you will be able to view them in the certification project UI within Partner Connect.
+Once you submit your test results, you will be able to view them in the certification project UI within Connect at this URL: 
+```
+https://connect.uat.redhat.com/projects/{ProjectID}/images/{ImageID}/scan-results
+```
+<b>Note</b>: You must go directly to this link to view your test results. The “images” tab in the UAT environment UI will not display during our beta phase. Therefore, you will not be able to navigate to the image test results without using the direct URL.
 
 ### 9. We need your input to improve our tooling and partner experience! Please share your feedback [here](https://forms.gle/Wyo9eEe1EDUqdCAy7)
 
