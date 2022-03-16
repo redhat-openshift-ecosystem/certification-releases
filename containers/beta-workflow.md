@@ -8,7 +8,7 @@ a. Use the credentials for your production [Partner Connect](connect.redhat.com)
 ### 2. Create your certification project
 - Navigate to "Product certification" -> "Manage certification projects"
 - Select "Create Project"
-- Select "Linux Containers" as the platform 
+- Select "Red Hat OpenShift" or "Red Hat Enterprise Linux" as the desired platform 
 - Select "Container Image" as what you want to certify
 
 ### 3. Setup your project
