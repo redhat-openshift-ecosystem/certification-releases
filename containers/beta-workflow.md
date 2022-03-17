@@ -53,7 +53,7 @@ c. Download the [Preflight certification utility](https://github.com/redhat-open
 
 d. Run Preflight (without submitting results)
 
-<b>Running container policy checks against a container iteratively until all tests pass:</b>
+Running container policy checks against a container iteratively until all tests pass:
 ```
 set $ PFLT_PYXIS_HOST=catalog.uat.redhat.com/api/containers
 
@@ -115,9 +115,9 @@ Running container policy checks against a container iteratively until all tests 
 ```
 set $ PFLT_PYXIS_HOST=catalog.uat.redhat.com/api/containers
  
-preflight check container registry.connect.redhat.com/your-namespace/your-image:sometag \
+preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/[image-name]:[tag] \
 --pyxis-api-token=<your-api-token> \
---certification-project-id=<cert-project-id> 
+--certification-project-id=<UAT-cert-project-id> 
 ```
 
 ### 6. Review log information and make adjustments as needed
@@ -131,11 +131,22 @@ preflight check container registry.connect.redhat.com/your-namespace/your-image:
 ### 8. Submit Results
   
   <b>Running container policy checks against a container that passes all tests needed to submit to Red Hat:</b>
+  
+  *Non-Red Hat Container Registry*
   ```
-  preflight check container registry.example.org/your-namespace/your-image:sometag \
+  preflight check container registry.example.org/[your-namespace]/[image-name]:[tag] \
   --submit \
   --pyxis-api-token=<your-api-token> \
-  --certification-project-id=<your-project-id> \
+  --certification-project-id=<UAT-project-id> \
+  --docker-config=/path/to/your/dockerconfig
+  ```
+  
+  *Red Hat container registry and marketplace if applicable*
+  ```
+  preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/[image-name]:[tag] \
+  --submit \
+  --pyxis-api-token=<your-api-token> \
+  --certification-project-id=<UAT-project-id> \
   --docker-config=/path/to/your/dockerconfig
   ```
 
