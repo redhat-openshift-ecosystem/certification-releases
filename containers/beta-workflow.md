@@ -4,8 +4,8 @@
 
 ## Part One: Setting up your certification project in the UAT environment
 
-### 1. Log in to the Partner Connect [UAT environment](connect.uat.redhat.com)
-a. Use the credentials for your production [Partner Connect](connect.redhat.com) technology partner account.
+### 1. Log in to the Partner Connect [UAT environment](https://connect.uat.redhat.com)
+a. Use the credentials for your production [Partner Connect](https://connect.redhat.com) technology partner account.
 
 ### 2. Create your certification project
 - Navigate to "Product certification" -> "Manage certification projects"
@@ -66,7 +66,7 @@ preflight check container registry.example.org/your-namespace/your-image:sometag
 
 Please do not follow the instructions in the UI of the UAT environment for this distribution method. Use the following instructions. Beta testing has a dependency on the production version of the Partner Connect portal. Take care, as utilizing this method has the potential to impact your production container projects.
 
-<b>Prerequisite</b>: Create and set up a container certification project at [connect.redhat.com](connect.redhat.com) in your Partner Connect portal technology partner account set to distribute to the Red Hat container registry. You will use some information from this project to complete your UAT testing.
+<b>Prerequisite</b>: Create and set up a container certification project at [connect.redhat.com](https://connect.redhat.com) in your Partner Connect portal technology partner account set to distribute to the Red Hat container registry. You will use some information from this project to complete your UAT testing.
 
 a. Build your container
 
@@ -99,7 +99,7 @@ In order to push your container, you must first tag it so it is associated to th
 ```
 podman tag [image-id] scan.connect.redhat.com/ospid-[production-project-ID]/[image-name]:[tag]
 ```
-<b>Note</b>: Do not use the UAT project ID - use your production project ID from [connect.redhat.com](connect.redhat.com)
+<b>Note</b>: Do not use the UAT project ID - use your production project ID from [connect.redhat.com](https://connect.redhat.com)
 
 <b>Push your container</b>
 This command will send your container to the certification registry. Replace the [image-name] and [tag] parameters and use the same replacement values as used in the docker tag command.
