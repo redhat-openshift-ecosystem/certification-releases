@@ -66,7 +66,19 @@ preflight check container registry.example.org/your-namespace/your-image:sometag
 
 Please do not follow the instructions in the UI of the UAT environment for this distribution method. Use the following instructions. Beta testing has a dependency on the production version of the Partner Connect portal. Take care, as utilizing this method has the potential to impact your production container projects.
 
-<b>Prerequisite</b>: Create and set up a container certification project at [connect.redhat.com](https://connect.redhat.com) in your Partner Connect portal technology partner account set to distribute to the Red Hat container registry. You will use some information from this project to complete your UAT testing.
+<b>Prerequisite</b>: 
+
+*If you DO NOT already have an existing container project to work with in the production Partner Connect portal*
+
+Create and set up a container certification project at [connect.redhat.com](https://connect.redhat.com) in your Partner Connect portal technology partner account set to distribute to the Red Hat container registry. You will use some information from this project to complete your UAT testing.
+
+Create a contaimer certification project at [connect.uat.redhat.com](https://connect.uat.redhat.com) as well to match the production project. 
+
+*If you DO already have an existing container project to work with in the production Partner Connect portal*
+
+Make sure you also have an associated container project in your UAT account at [connect.uat.redhat.com](https://connect.uat.redhat.com)
+
+You will need both the production project ID as well as the UAT project ID to complete the following steps.
 
 a. Build your container
 
