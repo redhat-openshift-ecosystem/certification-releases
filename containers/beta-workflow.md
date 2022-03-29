@@ -32,10 +32,14 @@ a. Use the credentials for your production [Partner Connect](https://connect.red
 ### 5. Submit your container image for verification
 
 *Prerequisites
-- You must use a RHEL system
-- You must use podman to log into the registry your image is hosted in and have the location of the authentication file that is automatically created ([see here](https://docs.podman.io/en/latest/markdown/podman-login.1.html#authfile-path))
-- Connect project must be set up (does not have to be complete, but must be started)
-- You will need a pyxis API key ([found here](https://connect.uat.redhat.com/account/api-keys))
+1. Review certification requirements [here](https://connect.redhat.com/en/partner-resources/container-certification-policy-guide) (Please disregard the test names - this document is being updated)
+
+<b>Please Note:</b> If your container image needs to run as root, this will currently fail the latest preflight tool release. Please, for testing purposes, explicitly state a USER in the dockerfile. Running as root is not recommended, however, we are aware that certain product types require these privileges.
+
+2. You must use a RHEL system
+3. You must use podman to log into the registry your image is hosted in and have the location of the authentication file that is automatically created ([see here](https://docs.podman.io/en/latest/markdown/podman-login.1.html#authfile-path))
+4. Connect project must be set up (does not have to be complete, but must be started)
+5. You will need a pyxis API key ([found here](https://connect.uat.redhat.com/account/api-keys))
 
 <b>Non-Red Hat container registry</b>
 
