@@ -147,6 +147,7 @@ preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/
 ### 8. Submit Results
   
   <b>Running container policy checks against a container that passes all tests needed to submit to Red Hat:</b>
+
   <b>Note</b> for dockerconfig, you can refer to [Authenticating to Registries](https://github.com/redhat-openshift-ecosystem/openshift-preflight#authenticating-to-registries). 
  
   *Non-Red Hat Container Registry*
