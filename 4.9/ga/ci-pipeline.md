@@ -14,6 +14,7 @@
   * [Step 3 - Create an OpenShift Project (namespace) to work in](#step3)
   * [Step 4 - Add the Kubeconfig secret](#step4)
   * [Step 5 - Import Red Hat Catalogs](#step5)
+  * [Optional Step - If using an OpenShift on Power cluster](#anyuid-scc-ppc64e)
   * [Step 6 - Install the Certification Pipeline and dependencies into the cluster](#step6)
   * [Step 7 - Configuration Steps for Submitting Results](#step7)
 * [Optional configuration](#optional-config)
@@ -150,6 +151,12 @@ oc import-image redhat-marketplace-index \
   --all
 ```
 
+### <a id="anyuid-scc-ppc64e"></a>Optional Step - If using an OpenShift on IBM Power(ppc64le) cluster
+Grant the anyuid security context constraints (SCC) to the default pipeline service account. This will avoid any permission issues on ppc64le architecture.
+```bash
+oc adm policy add-scc-to-user anyuid -z pipeline
+```
+
 ### <a id="step6"></a>Step 6 - Install the Certification Pipeline and dependencies into the cluster
 ```bash
 git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
@@ -228,6 +235,11 @@ oc create secret docker-registry registry-dockerconfig-secret \
 
 # <a id="execute-pipeline"></a>Execute the Pipeline (Development Iterations)
 There are multiple ways to execute the Pipeline.  Below are several examples but parameters and workspaces can be removed or added per your requirements. 
+### <a id="crc-pod-template"></a>Optional note1 - If using an OpenShift on ppc64le cluster
+Regardless of the method used, for ppc64le, it is necessary to pass the following tkn CLI arg to the tkn pipeline command to avoid any permission issues
+```bash
+--pod-template templates/crc-pod-template.yml
+```
 
 ## <a id="minimal-pipeline-run"></a>Minimal Pipeline Run
 
@@ -252,6 +264,8 @@ The following is set as default and doesn't need to be explicitly included, but 
 --param kubeconfig_secret_name=kubeconfig \
 --param kubeconfig_secret_key=kubeconfig
 ```
+### <a id="multi-arch-pipeline-img"></a>Optional note2 - If using an OpenShift on ppc64le/s390x cluster
+Change the value of `param pipeline_image` of type string from `quay.io/redhat-isv/operator-pipelines-images:released` to `quay.io/redhat-isv/operator-pipelines-images:multi-arch`
 
 > #### Troubleshooting Tip
 >
