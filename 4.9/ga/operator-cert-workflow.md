@@ -22,8 +22,8 @@ The container API key can be obtained from connect.redhat.com
 2. Click the login icon
 3. Click the Log in for technology partners button
 4. Login with your Red Hat Credentials
-5. In the top navigation click the Product certification dropdown
-6. In the dropdown click the Container API kyes link
+5. In the top navigation click the `Product certification` dropdown
+6. In the dropdown click the `Container API keys` link
 7. From the `My API Keys` screen click the `Generate New Key` button
 8. In the popup screen enter a descriptive Key Name and click the `save` button
 9. Your API Key will be generated and displayed on screen. 
