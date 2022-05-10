@@ -150,7 +150,6 @@ preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/
 
   <b>Note</b> for dockerconfig, you can refer to [Authenticating to Registries](https://github.com/redhat-openshift-ecosystem/openshift-preflight#authenticating-to-registries). 
  
-  *Non-Red Hat Container Registry*
   ```
   preflight check container registry.example.org/[your-namespace]/[image-name]:[tag] \
   --submit \
