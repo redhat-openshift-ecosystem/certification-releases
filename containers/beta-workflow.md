@@ -76,7 +76,7 @@ Please do not follow the instructions in the UI of the UAT environment for this 
 
 Create and set up a container certification project at [connect.redhat.com](https://connect.redhat.com) in your Partner Connect portal technology partner account set to distribute to the Red Hat container registry. You will use some information from this project to complete your UAT testing.
 
-Create a contaimer certification project at [connect.uat.redhat.com](https://connect.uat.redhat.com) as well to match the production project. 
+Create a container certification project at [connect.uat.redhat.com](https://connect.uat.redhat.com) as well to match the production project. 
 
 *If you DO already have an existing container project to work with in the production Partner Connect portal*
 
@@ -109,7 +109,7 @@ podman login -u unused scan.connect.redhat.com
 <b>Tag your container</b>:
 In order to push your container, you must first tag it so it is associated to the certification registry. The podman tag command will do this. You must replace the following parameters:
 - [image-id]: The container IMAGE ID for the image you want to submit. This IMAGE ID can be displayed using the podman images command.
-- [image-name]: Assign any name to your container. This name wil not be used for publishing.
+- [image-name]: Assign any name to your container. This name will not be used for publishing.
 - [tag]: A version identifier for this image. If this image is published, this tag will be published and used to uniquely identify this image. The tag cannot be empty or the string "latest".
 
 ```
