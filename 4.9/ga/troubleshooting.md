@@ -156,6 +156,15 @@ The version used in your Pull Request title will be the version directory used t
 | `operator simple-demo-operator (v1.2.3)` | `v1.2.3` |
 | `operator simple-demo-operator (1.2.3)`  | `1.2.3`  |
 
+Note: If you are certifying an operator bundle for the Red Hat Marketplace (Powered by IBM), you must add two more annotations to your `annotations.yaml` file. 
+
+| Annotation Keyword String | Required Value |
+|-------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `marketplace.openshift.io/remote-workflow:` | `https://marketplace.redhat.com/en-us/operators/<package-name>/pricing?utm_source=openshift_console` |
+| `marketplace.openshift.io/support-workflow:` | `https://marketplace.redhat.com/en-us/operators/<package-name>/support?utm_source=openshift_console` |
+
+Omitting these annotations is a common cause of failures where an `annotations.yaml` file worked fine in a Certified Operators Bundle but now fails Red Hat Marketplace bundle certification.
+
 Also please ensure to double check that your package naming remains consistent throughout the metadata code, particularly in the annotations.yaml file.
 
 
