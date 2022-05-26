@@ -37,6 +37,7 @@
 * [verify-ci-results](#verify-ci-results)
 * [query-publishing-checklist](#query-publishing-checklist)
 * [merge-pr](#merge-pr)
+* [verify-project-distribution](#verify-project-distribution)
 
 ### [Automated Pull Request (Tested on Partner Premise)](#automated)
 * [Use the latest Pipeline code](#latest-code)
@@ -266,18 +267,13 @@ Failures here usually point to an incomplete Checklist item.  Please login to co
 ## <a id="merge-pr"></a>merge-pr
 Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
 
-
-
-
-
-
-
-
-
+## <a id="verify-project-distribution"></a>verify-project-distribution
+Failures in this step suggest a mismatch between the destination catalog (e.g "Red Hat Certified", "Red Hat Marketplace") selected during project setup on connect.redhat.com and your pull request's GitHub repository.
+Below lists the appropriate repositories:
+- Red Hat Certified [Repository](https://github.com/redhat-openshift-ecosystem/certified-operators)
+- Red Hat Marketplace [Repository](https://github.com/redhat-openshift-ecosystem/redhat-marketplace-operators)
 
 <hr>
-
-
 
 ## <a id="pkg-name"></a>Package Name
 Your Operator's package name must be used consistently in three areas
