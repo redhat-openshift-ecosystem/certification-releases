@@ -1,6 +1,9 @@
-# Container Certification
+# BETA TEST Container Certification instructions. Do not use for production.
 
-## *This currently is only applicable to containers for OpenShift Container Platform and Red Hat Enterprise Linux*
+## Production documentation is available at [Red Hat Software Certification Workflow Guide](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.45/html/red_hat_software_certification_workflow_guide/assembly_working-with-containers_openshift-sw-cert-workflow-introduction-to-redhat-openshift-operator-certification)
+
+## *This currently is only applicable to containers for OpenShift Container Platform and Red Hat Enterprise Linux, and only during Beta / User Acceptance Test (UAT). Do NOT use for production!*   ##
+
 
 ## Part One: Setting up your certification project in the UAT environment
 
