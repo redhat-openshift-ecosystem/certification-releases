@@ -150,8 +150,7 @@ preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/
 ### 8. Submit Results
   
   <b>Running container policy checks against a container that passes all tests needed to submit to Red Hat:</b>
-  
-  *Non-Red Hat Container Registry*
+ 
   ```
   preflight check container registry.example.org/[your-namespace]/[image-name]:[tag] \
   --submit \

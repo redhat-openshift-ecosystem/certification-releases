@@ -17,7 +17,7 @@
 ### Common Issues
 * [Authorization Errors](#authorizationerrors)
 * [File Not Found Errors](#filenotfound)
-
+* [Calling Remote API Errors](#callingremoteapierrors)
 ## <a id="runasnonroot"></a>RunAsNonRoot
 The certification tooling is verifying that the USER is declared in the dockerfile and is not one of the following:
 - USER root
@@ -62,3 +62,7 @@ Possible causes:
 ## <a id="filenotfound"></a>File Not Found Errors
 Possible causes:
   - You are not specifying the full path of the docker config file: please make sure you are using the full path, not the relative path. The file should only include the credentials for the image being certified.
+
+## <a id="callingremoteapierrors"></a>Calling Remote API Errors
+Possible causes:
+  - You are using the old opsid in --certification-project-id, you could find the project id in project link  https://connect.redhat.com/projects/1234567890/overview
