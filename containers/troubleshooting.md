@@ -17,6 +17,7 @@
 ### Common Issues
 * [Authorization Errors](#authorizationerrors)
 * [File Not Found Errors](#filenotfound)
+* [Allowlisted Registry Error](#allowlisted)
 
 ## <a id="runasnonroot"></a>RunAsNonRoot
 The certification tooling is verifying that the USER is declared in the dockerfile and is not one of the following:
@@ -62,3 +63,49 @@ Possible causes:
 ## <a id="filenotfound"></a>File Not Found Errors
 Possible causes:
   - You are not specifying the full path of the docker config file: please make sure you are using the full path, not the relative path. The file should only include the credentials for the image being certified.
+
+## <a id="allowlisted"></a>Allowlisted Registry Error
+  <i>"The logs are saying `The image registry is not valid allowlisted registry.`" when I try to submit</i>
+
+Possible causes:
+ - Your project is set up to use Red Hat Container Registry: 
+   - You are trying to certify an image that has yet to be published to this registry. See steps to publish [here](#publishtointernalregistry)
+   - You are running Preflight against an image other than the one that exists in scan.connect.redhat.com. See step to Submit Results [here](#submitresults)
+
+## <a id="publishtointernalregistry"></a>Publish To Red Hat Container Registry
+The following commands will allow you to log in to the registry, tag your image and push your image:
+
+<b>Container Registry Login:</b>
+The inbound certification registry requires authorization. The following command will allow you to authenticate to the registry. You will be prompted for a password. Use the registry key that is provided to you in any of your production container project set to distribute to the Red Hat container registry.
+
+*You will find this registry key in the "Upload image manually" page of your Red Hat hosted container project.
+
+```
+podman login -u unused scan.connect.redhat.com
+```
+
+<b>Tag your container</b>:
+In order to push your container, you must first tag it so it is associated to the certification registry. The podman tag command will do this. You must replace the following parameters:
+- [image-id]: The container IMAGE ID for the image you want to submit. This IMAGE ID can be displayed using the podman images command.
+- [image-name]: Assign any name to your container. This name wil not be used for publishing.
+- [tag]: A version identifier for this image. If this image is published, this tag will be published and used to uniquely identify this image. The tag cannot be empty or the string "latest".
+
+```
+podman tag [image-id] scan.connect.redhat.com/ospid-[production-project-ID]/[image-name]:[tag]
+```
+
+<b>Push your container</b>
+This command will send your container to the certification registry. Replace the [image-name] and [tag] parameters and use the same replacement values as used in the docker tag command.
+
+```
+podman push scan.connect.redhat.com/ospid-[production-project-ID]/[image-name]:[tag]
+```
+
+## <a id="submitresults"></a>Submit Results
+ ```
+ preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/[image-name]:[tag] \
+ --submit \
+ --pyxis-api-token=<your-api-token> \
+ --certification-project-id=<project-id> \
+ --docker-config=/path/to/your/dockerconfig.json
+ ```
