@@ -62,11 +62,10 @@ d. Run Preflight (without submitting results)
 
 Running container policy checks against a container iteratively until all tests pass:
 ```
-set $ PFLT_PYXIS_HOST=catalog.uat.redhat.com/api/containers
-
 preflight check container registry.example.org/your-namespace/your-image:sometag \
 --pyxis-api-token=<your-api-token> \
---certification-project-id=<cert-project-id> 
+--certification-project-id=<cert-project-id> \
+--pyxis-host=catalog.uat.redhat.com/api/containers
 ```  
 
 <b>Red Hat Container registry and marketplace if applicable [only use if necessary]</b>
