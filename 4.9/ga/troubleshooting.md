@@ -270,7 +270,7 @@ Failures here may be caused by multiple issues
 Failures here usually point to an incomplete Checklist item.  Please login to connect.redhat.com and complete all the items listed under the Project publishing checklist. 
 
 ## <a id="merge-pr"></a>merge-pr
-Failures at this step are uncommon.  If you do experience a failure or error at this step, contact Red Hat Support.
+Failure at this step may happen if the pull request is a draft, convert the draft to a pull request and then retry. If this problem persists at this step, contact Red Hat Support.
 
 ## <a id="verify-project-distribution"></a>verify-project-distribution
 Failures in this step suggest a mismatch between the destination catalog (e.g "Red Hat Certified", "Red Hat Marketplace") selected during project setup on connect.redhat.com and your pull request's GitHub repository.
