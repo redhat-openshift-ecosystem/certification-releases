@@ -25,16 +25,16 @@ The certification tooling is verifying that the USER is declared in the dockerfi
 - USER 0
 - no user specified
   
-If you are an infrastructure partner, and your container needs root privileges, you must navigate to the 'Settings' tab of your certification project. Scroll down, and select 'Privileged' under the 'Host level access' field. This will allow the certification tooling to omit the RunAsNonRoot test and is submect to Red Hat review. This must be selected before the preflight tool is used.
+If you are an infrastructure partner, and your container needs root privileges, you must navigate to the 'Settings' tab of your certification project. Scroll down, and select 'Privileged' under the 'Host level access' field. This will allow the certification tooling to omit the RunAsNonRoot test and is subject to Red Hat review. This must be selected before the preflight tool is used.
   
 ## <a id="basedonubi"></a>BasedOnUBI
-This test verifies that the container is using either UBI or RHEL as the base image. This will fail if you are using another linux distribution or scratch. Open a support case if you have questions about this policy.
+This test verifies that the container is using either UBI or RHEL as the base image. This will fail if you are using another Linux distribution or scratch. Open a support case if you have questions about this policy.
 
 ## <a id="hasmodifiedfiles"></a>HasModifiedFiles
 This test checks that no files installed via RPM in the base Red Hat layer are modified. Files that are able to be modified by end users, like config files, are the only modified files allowed.
   
 ## <a id="haslicense"></a>HasLicense
-Your dockerfile must include a licenses directory and must include one or more license files. If the directory is empty or non-existent, this test will fail. The license should be for the software product itself.
+Your dockerfile must include commands to create and populate a /licenses directory at the top level of your container filesystem. The /licenses directory must include one or more license files. (License files are text files that spell out the terms under which the container may be used and/or redistributed.) If the directory is empty or non-existent, this test will fail. The license(s) should be for the software product itself.
   
 ## <a id="hasuniquetag"></a>HasUniqueTag
 The test is confirming that the registry has one or more tags other than 'latest'. This test will also fail if your chosen registry does not expose the '/tags/list' endpoint.
