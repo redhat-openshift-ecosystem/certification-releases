@@ -13,6 +13,7 @@
 * [HasNoProhibitedPackages](#hasnoprohibitedpackages)
 * [HasRequiredLabel](#hasrequiredlabel)
 * [Vulnerability Scan After Submission](#vulnerabilityscanner)
+* [Mitigating Security Vulnerabilities](#mitigatingvulnerabilities)
 
 ### Common Issues
 * [Authorization Errors](#authorizationerrors)
@@ -49,8 +50,37 @@ The test is confirming that the registry has one or more tags other than 'latest
 See [our policy guide](https://access.redhat.com/documentation/en-us/red_hat_openshift_certification/4.9/html-single/red_hat_openshift_software_certification_policy_guide/index#:~:text=Chapter%C2%A02.%C2%A0Requirements%20for%20container%20images) for the required labels. Double check each label is included in the dockerfile. 
   
 ## <a id="vulnerabilityscanner"></a>Vulnerability Scan After Submission
-The vulnerability scanning mechanism, powered by the Clair vulnerability scanner, runs after you submit your test results to Partner Connect. You must receive a grade of A to be able to publish the image. If you receive a grade of B or lower:
-- Make sure you are pulling the latest UBI version
+The vulnerability scanning mechanism, powered by the Clair vulnerability scanner, runs after you submit your test results to Partner Connect. You must receive a grade of A to be able to publish the image. If you receive a grade of B or lower, and are using (pulling) the latest available UBI image version, continue on with [Mitigating Security Vulnerabilities](#mitigatingvulnerabilities).
+
+## <a id="mitigatingvulnerabilities"></a>Mitigating Security Vulnerabilities
+Red Hat base images (including the RHEL and UBI images) are periodically rebuilt to address security vulnerabilities within them, but there can be a lag between when Important vulnerabilities arise and when they are addressed via a UBI release. This can lead to an image being built on the UBI, for example, failing security vulnerability scans in between release cycles of the UBI itself.
+
+### RHEL and UBI
+If the container is built against RHEL 7 (also still works on UBI 8/9), add the following to the Dockerfile after the `FROM` line: 
+
+```
+RUN yum update -y [optional package name list] && \
+    yum clean all
+```
+
+### UBI Minimal
+If the container is built against ubi8-minimal or ubi9-minimal, add the following to the Dockerfile after the `FROM` line: 
+
+```
+RUN microdnf upgrade -y [optional package name list] && \
+    microdnf clean all
+```
+
+### UBI Micro
+If the container is built against ubi8-micro or ubi9-micro, since no package manager is provided for these base images, mitigating vulnerabilities in between image releases is not possible using this method.
+
+### Optional Use of DNF
+Although UBI versions 8 & 9 both have the `yum` command available, it was supplanted with `dnf` beginning with RHEL/UBI 8. To use `dnf`, replace the `yum update` command in the Dockerfile:
+
+```
+RUN dnf upgrade -y [optional package name list] && \
+    dnf clean all 
+```
 
 ## <a id="authorizationerrors"></a>Authorization Errors
   <i>"The logs are saying I am not authorized"</i>
