@@ -107,7 +107,9 @@ Make sure you have included the Authorized GitHub Usernames in Connect
 See more detail [here](#auth-gh-users).
 
 ## <a id="submission-validation"></a>submission-validation
-You may only have one open Pull Request at a time. Attempting to open a second Pull request while one is still open will result in a failure here. 
+Please check the pipeline.log file to check for either of these two possible causes: 
+1. You may only have one open Pull Request at a time. Attempting to open a second Pull request while one is still open will result in a failure 
+2. The PR request was opened by a user who is not listed in the Project Settings page's **Authorized GitHub user accounts** field. Please verify that all required usernames are specified in that field, with each name separated by a comma. Read the **Authorized GitHub Usernames** section below for more details.
 
 ### <a id="auth-gh-users"></a>Authorized GitHub Usernames
 Any GitHub `username` or GitHub `organization` used to submit a pull request must be entered in the GitHub Authorized Users field on the Project settings page in connect.redhat.com.
