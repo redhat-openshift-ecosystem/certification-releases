@@ -111,29 +111,42 @@ The inbound certification registry requires authorization. The following command
 *You will find this registry key in the "Upload image manually" page of your Red Hat hosted container project.
 
 ```
-podman login -u unused scan.connect.redhat.com
+podman login -u redhat-isv-containers+[production-project-ID]-robot quay.io
 ```
 
 <b>Tag your container</b>:
 In order to push your container, you must first tag it so it is associated to the certification registry. The podman tag command will do this. You must replace the following parameters:
 - [image-id]: The container IMAGE ID for the image you want to submit. This IMAGE ID can be displayed using the podman images command.
-- [image-name]: Assign any name to your container. This name wil not be used for publishing.
+- [production-project-ID]: This is the Project ID that is listed in the connect portal. 
 - [tag]: A version identifier for this image. If this image is published, this tag will be published and used to uniquely identify this image. The tag cannot be empty or the string "latest".
 
 ```
-podman tag [image-id] scan.connect.redhat.com/ospid-[production-project-ID]/[image-name]:[tag]
+podman tag [image-id] quay.io/redhat-isv-containers/[production-project-ID]:[tag]
 ```
 
 <b>Push your container</b>
 This command will send your container to the certification registry. Replace the [image-name] and [tag] parameters and use the same replacement values as used in the docker tag command.
 
 ```
-podman push scan.connect.redhat.com/ospid-[production-project-ID]/[image-name]:[tag]
+podman push quay.io/redhat-isv-containers/[production-project-ID]:[tag]
+```
+
+<b>Add `latest` tag</b>
+If you distribute your containers with `latest` tag, and want catalog.redhat.com to also list `latest` tag as an option, you must also tag and push this separately to the quay registry.
+
+```
+podman tag [image-id] quay.io/redhat-isv-containers/[production-project-ID]:latest
+```
+
+<b>Push your container with `latest` tag</b>
+
+```
+podman push quay.io/redhat-isv-containers/[production-project-ID]:latest
 ```
 
 ## <a id="submitresults"></a>Submit Results
  ```
- preflight check container scan.connect.redhat.com/ospid-[PRODUCTION-project-ID]/[image-name]:[tag] \
+ preflight check container quay.io/redhat-isv-containers/[production-project-ID]:[tag] \
  --submit \
  --pyxis-api-token=<your-api-token> \
  --certification-project-id=<project-id> \
