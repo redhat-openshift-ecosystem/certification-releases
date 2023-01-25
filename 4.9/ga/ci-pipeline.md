@@ -1,14 +1,15 @@
-# NOTE: The documentation included below is now obsolete.
-## Current documentation is available at
-[Chapter 21: Running the certification test suite locally](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.56/html/red_hat_software_certification_workflow_guide/assembly-running-the-certification-suite-locally_openshift-sw-cert-workflow-complete-pre-certification-checklist) in the Red Hat Software Certification Workflow Guide.
-
-The original documentation is included below for historical purposes.
 
 # Operator Certification CI Pipeline<br/>Instructions
 ## Get Help:
 > Technology Partner Success Desk is a service  for all our technology partners where they can ask technical and non-technical questions pertaining to Red Hat offerings, programs, engagement processes, etc. If you run into any issues throughout these instructions please reach out to the Technology Partner Success Desk. 
 >
 > You can access the Success Desk by going to: [Red Hat Help Request](https://connect.redhat.com/support/technology-partner/#/). 
+
+# NOTE: The documentation included below is now obsolete.
+## Current documentation is available at [Chapter 21: Running the certification test suite locally](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.56/html/red_hat_software_certification_workflow_guide/assembly-running-the-certification-suite-locally_openshift-sw-cert-workflow-complete-pre-certification-checklist) in the Red Hat Software Certification Workflow Guide.
+
+The original documentation is included below for historical purposes.
+
 
 ## Table of Contents
 * [Before you start](#before-you-start)
