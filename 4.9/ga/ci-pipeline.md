@@ -5,10 +5,9 @@
 >
 > You can access the Success Desk by going to: [Red Hat Help Request](https://connect.redhat.com/support/technology-partner/#/). 
 
-# NOTE: The documentation included below is now obsolete.
-## Current documentation is available at [Chapter 21: Running the certification test suite locally](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.56/html/red_hat_software_certification_workflow_guide/assembly-running-the-certification-suite-locally_openshift-sw-cert-workflow-complete-pre-certification-checklist) in the Red Hat Software Certification Workflow Guide.
+# NOTE: The documentation below is also available on access.redhat.com.
+## Additional documentation is available at [Chapter 21: Running the certification test suite locally](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.56/html/red_hat_software_certification_workflow_guide/assembly-running-the-certification-suite-locally_openshift-sw-cert-workflow-complete-pre-certification-checklist) in the Red Hat Software Certification Workflow Guide.
 
-The original documentation is included below for historical purposes.
 
 
 ## Table of Contents
