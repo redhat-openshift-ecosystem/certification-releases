@@ -351,7 +351,7 @@ In order to submit results add the following `--param`'s where `$UPSTREAM_REPO_N
 The following is set as default and doesn't need to be explicitly included, but can be overridden if your Pyxis secret is created under a different name.
 ```bash
 --param pyxis_api_key_secret_name=pyxis-api-secret \
---param pyxis_api_key_secret_key=pyxis-api-key
+--param pyxis_api_key_secret_key=pyxis_api_key
 ```
 
 ## <a id="submit-result-minimal"></a>Submit results from Minimal Pipeline Run
