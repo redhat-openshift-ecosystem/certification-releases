@@ -95,7 +95,7 @@ cert_project_id: "<your partner project id>"
 *annotations.yaml*: This file should include an OpenShift versions annotation. *(This should be added to any existing content)*
 ```bash
 # OpenShift annotations.
-com.redhat.openshift.versions: v4.6-v4.8
+com.redhat.openshift.versions: v4.9-v4.12
 ```
 
 The `com.redhat.openshift.versions` field, part of the metadata in the operator bundle, is used to determine whether an operator is included in the certified catalog for a given OpenShift version. You must use it to indicate the version(s) of OpenShift supported by your operator.
@@ -103,8 +103,8 @@ The `com.redhat.openshift.versions` field, part of the metadata in the operator 
 Note that the letter 'v' must be used before the version, and spaces are not allowed.
 The syntax is as follows:
 * A single version indicates that the operator is supported on that version of OpenShift or later. The operator will be automatically added to the certified catalog for all subsequent OpenShift releases.
-* A single version preceded by '=' indicates that the operator is supported ONLY on that version of OpenShift. For example, using `"=v4.8"` will add the operator to the certified catalog for OpenShift 4.8, but not for later OpenShift releases.
-* A range can be used to indicate support only for OpenShift versions within that range. For example, using `"v4.5-v4.8"` will add the operator to the certified catalog for OpenShift 4.5, 4.6 and 4.7 but not for OpenShift 4.9.
+* A single version preceded by '=' indicates that the operator is supported ONLY on that version of OpenShift. For example, using `"=v4.10"` will add the operator to the certified catalog for OpenShift 4.10, but not for later (or earlier) OpenShift releases.
+* A range can be used to indicate support only for OpenShift versions within that range. For example, using `"v4.9-v4.11"` will add the operator to the certified catalog for OpenShift 4.9, 4.10 and 4.11 but not for OpenShift 4.12.
 
 For more details, please see [Managing OpenShift Versions](https://redhat-connect.gitbook.io/certified-operator-guide/ocp-deployment/operator-metadata/bundle-directory/managing-openshift-versions) in the Certified Operator Build Guide.
 
