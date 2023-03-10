@@ -172,6 +172,16 @@ cd operator-pipelines
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 ```
+A subset of tasks in the pipeline requires privilege escalation which is no longer
+supported with OpenShift Pipelines 1.9. Thus a new `SCC` needs to be created and linked
+with `pipeline` service account. Creating [SCC](https://docs.openshift.com/container-platform/4.11/authentication/managing-security-context-constraints.html#security-context-constraints-creating_configuring-internal-oauth)
+requires user with cluster-admin privileges.
+```bash
+# Create a new SCC
+oc apply -f ansible/roles/operator-pipeline/templates/openshift/openshift-pipelines-custom-scc.yml
+# Add SCC to a pipeline service account
+oc adm policy add-scc-to-user pipelines-custom-scc -z pipeline
+```
 ### <a id="step7"></a>Step 7 - Configuration Steps for Submitting Results
 
 #### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
