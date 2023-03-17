@@ -44,6 +44,8 @@
 
 > Note: The CI Pipeline will make a Persistent Volume claim for a 5GB volume. If you are running an [OpenShift cluster on bare metal](https://docs.openshift.com/container-platform/4.9/installing/installing_bare_metal/installing-bare-metal.html), ensure you have configured [Dynamic Volume Provisioning](https://docs.openshift.com/container-platform/4.9/storage/dynamic-provisioning.html). If you do not have Dynamic Volume Provisioning configured, consider setting up a [Local Volume](https://docs.openshift.com/container-platform/4.9/storage/persistent_storage/persistent-storage-local.html). The Local Volume storage path must have the `container_file_t` SELinux label to avoid Permission Denied errors, i.e. `chcon -Rv -t container_file_t "storage_path(/.*)?"`.
 
+> Note: If you are setting up a fresh cluster on bare metal, you must enable the optional internal OpenShift container registry. By default, the OpenShift Image Registry Operator bootstraps itself as `Removed`. Please see [Section 2.2.1 of the OpenShift Container Registry manual](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.12/html-single/registry/index#registry-removed_configuring-registry-operator) for details.  If this step is omitted, the pipeline will throw a failure in the digest-pinning.yml script.
+
 2. Kubeconfig file for a user with **cluster admin privileges**
 4. The contents of your Operator Bundle
 5. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
