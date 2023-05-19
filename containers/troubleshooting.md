@@ -50,7 +50,7 @@ The test is confirming that the registry has one or more tags other than 'latest
 See [our policy guide](https://access.redhat.com/documentation/en-us/red_hat_openshift_certification/4.9/html-single/red_hat_openshift_software_certification_policy_guide/index#:~:text=Chapter%C2%A02.%C2%A0Requirements%20for%20container%20images) for the required labels. Double check each label is included in the dockerfile. 
   
 ## <a id="vulnerabilityscanner"></a>Vulnerability Scan After Submission
-The vulnerability scanning mechanism, powered by the Clair vulnerability scanner, runs after you submit your test results to Partner Connect. You must receive a grade of A to be able to publish the image. If you receive a grade of B or lower, and are using (pulling) the latest available UBI image version, continue on with [Mitigating Security Vulnerabilities](#mitigatingvulnerabilities).
+The vulnerability scanning mechanism, powered by the Clair vulnerability scanner, runs after you submit your test results to Partner Connect. Your image must receive a grade in the range of A through C to be able to publish the image. If you receive a grade of D or lower, and are using (pulling) the latest available UBI image version, continue on with [Mitigating Security Vulnerabilities](#mitigatingvulnerabilities).
 
 ## <a id="mitigatingvulnerabilities"></a>Mitigating Security Vulnerabilities
 Red Hat base images (including the RHEL and UBI images) are periodically rebuilt to address security vulnerabilities within them, but there can be a lag between when Important vulnerabilities arise and when they are addressed via a UBI release. This can lead to an image being built on the UBI, for example, failing security vulnerability scans in between release cycles of the UBI itself.
