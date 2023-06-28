@@ -184,6 +184,9 @@ All images referenced in your Operator Bundle must reference SHA digest and not 
 
 In addition your clusterserviceversion.yaml must include a `relatedImages` section. This section should implement a format similar to the one below. 
 
+**Note:** This section can be created at bundle generation time by adding the `--use-image-digests` flag to the `operator-sdk generate bundle` command. 
+If the project was scaffolded with `operator-sdk`, running `USE_IMAGE_DIGESTS=true make bundle` will also generate this section.
+
 ```
 ...
 spec:
