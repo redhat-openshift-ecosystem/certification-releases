@@ -171,7 +171,7 @@ oc adm policy add-scc-to-user anyuid -z pipeline
 ```bash
 git clone https://github.com/redhat-openshift-ecosystem/operator-pipelines
 cd operator-pipelines
-oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines
+oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/pipelines/operator-ci-pipeline.yml
 oc apply -R -f ansible/roles/operator-pipeline/templates/openshift/tasks
 ```
 A subset of tasks in the pipeline requires privilege escalation which is no longer
