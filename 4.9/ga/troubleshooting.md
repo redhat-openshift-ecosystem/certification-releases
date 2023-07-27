@@ -67,15 +67,14 @@ When creating a pull request manually the title of your pull request must follow
 
 | Prefix | Package Name | Version |
 |--------|--------------|---------|
-| The word `operator` | Operator package name | Version in parenthesis. A `v` prefix is suggested.|
+| The word `operator` | Operator package name | Version in parenthesis. DO NOT use a 'v' prefix.|
 
-> Note: The version in your PR Title must match the version directory in your Operator Bundle.  
-> If you use the `v` prefix in your PR title it must also be used when naming your version directory. 
+> Note: The version string in your PR Title must match the version directory in your Operator Bundle.  
 
 ### Examples
-`operator simple-demo-operator (v0.0.0)`
+`operator simple-demo-operator (0.0.0)`
 
-`operator hello-world-certified (v.1.2.3)`
+`operator hello-world-certified (1.2.3)`
 
 `operator my-operator (3.2.1)`
 
