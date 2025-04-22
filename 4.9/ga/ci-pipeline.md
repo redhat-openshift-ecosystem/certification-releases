@@ -143,22 +143,27 @@ oc project <my-project-name> # switch into the project
 > *This kubeconfig will be used to deploy the Operator under test and run the certification checks.*
 
 ### <a id="step5"></a>Step 5 - Import Red Hat Catalogs
+
+Due to the excessive number of tags present on these images, attempting to import all tags with the `--all` flag may fail with an error `Unable to connect to the server: EOF`. To avoid this issue, import only the tag which corresponds to the major and minor version of your OpenShift cluster.
+
 ```bash
-oc import-image certified-operator-index \
-  --from=registry.redhat.io/redhat/certified-operator-index \
+OPENSHIFT_VERSION=<major and minor version of your OpenShift cluster> (ie: "v4.18")
+
+oc import-image certified-operator-index:${OPENSHIFT_VERSION} \
+  --from=registry.redhat.io/redhat/certified-operator-index:${OPENSHIFT_VERSION} \
   --reference-policy local \
   --scheduled \
-  --confirm \
-  --all
+  --confirm
 ```
 
 ```bash
-oc import-image redhat-marketplace-index \
-  --from=registry.redhat.io/redhat/redhat-marketplace-index \
+OPENSHIFT_VERSION=<major and minor version of your OpenShift cluster> (ie: "v4.18")
+
+oc import-image redhat-marketplace-index:${OPENSHIFT_VERSION} \
+  --from=registry.redhat.io/redhat/redhat-marketplace-index:${OPENSHIFT_VERSION} \
   --reference-policy local \
   --scheduled \
-  --confirm \
-  --all
+  --confirm
 ```
 
 ### <a id="anyuid-scc-ppc64e"></a>Optional Step - If using an OpenShift on IBM Power(ppc64le) cluster
