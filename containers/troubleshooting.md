@@ -149,6 +149,6 @@ podman push quay.io/redhat-isv-containers/[production-project-ID]:latest
  preflight check container quay.io/redhat-isv-containers/[production-project-ID]:[tag] \
  --submit \
  --pyxis-api-token=<your-api-token> \
- --certification-project-id=<project-id> \
+ --certification-component-id=<component-id> \
  --docker-config=/path/to/your/dockerconfig.json
  ```
