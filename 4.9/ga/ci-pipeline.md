@@ -105,7 +105,9 @@ com.redhat.openshift.versions: v4.6-v4.8
 Once you have the contents of your Operator bundle structured properly, 
 * Log into GitHub and fork the upstream repo: https://github.com/redhat-openshift-ecosystem/certified-operators
 * git clone your fork of the certified-operators repo
-* Add the contents of your Operator bundle to `operators` directory in your fork
+* Add the contents of your Operator bundle to `operators` directory in your fork 
+* Add the operator bundle by running $git add <bundle-name> . 
+* Commit changes with $git commit -m "<message>" and push the changes with $git push -u origin main  
 
 
 ## <a id="installation"></a>Installation
@@ -193,7 +195,7 @@ oc adm policy add-scc-to-user pipelines-custom-scc -z pipeline
 
 #### <a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created
 
-Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline. 
+Upon completion the Pipeline can automatically open a Pull Request to submit your Operator to Red Hat. To enable this functionally, add a GitHub API Token and use `--param submit=true` when running the pipeline.Instruction to create a new personal access token can be found: [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). 
 
 ```bash
 oc create secret generic github-api-token --from-literal GITHUB_TOKEN=<github token>
