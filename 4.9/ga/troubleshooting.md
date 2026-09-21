@@ -124,11 +124,13 @@ Once you have your GitHub username or organization identified follow the instruc
 
 1. Navigate to [connect.redhat.com](https://connect.redhat.com/)
 2. Click the `Login` button
-3. Click the `Log in for technology partners` button
-4. Click `Product Certification` > `Manage certification projects`
-5. Click on the Project link for your Operator Bundle Image
-6. Click on the `settings` tab
-7. Add your GitHub users/organizations to the `Authorized GitHub user accounts` field. 
+3. Click `Product Certification` -> `Certify your software`
+4. Click `Product management` -> `Manage components`
+5. Search for your Operator Bundle Image Component
+6. Click on the `Component Name`
+7. Click on `Repository Information`
+8. Add your GitHub users/organizations to the `Authorized GitHub user accounts` field.
+9. Click `Save`
 
 ![Auth GH Users](assets/AuthGHUsers.png)
 
