@@ -1,36 +1,44 @@
 # Operator Certification CI Pipeline<br/>Beta Instructions
 
 ## Table of Contents
-* [Before you start](#before-you-start)
-  * [What you will need](#what-you-need)
-  * [Preparing your Operator Bundle](#prepare-bundle)
-* [Installation](#installation)
-  * [Step 1 - Install OpenShift Pipelines Operator](#step1) 
-  * [Step 2 - Configure the OpenShift CLI tool](#step2)
-  * [Step 3 - Create an OpenShift Project (namespace) to work in](#step3)
-  * [Step 4 - Add the Kubeconfig secret](#step4)
-  * [Step 5 - Import Red Hat Catalogs](#step5)
-  * [Step 6 - Install the Certification Pipeline and dependencies into the cluster](#step6)
-  * [Step 7 - Configuration Steps for Submitting Results](#step7)
-* [Optional configuration](#optional-config)
-  * [Optional Step - If using digest pinning (required for submission)](#digest-pinning-config)
-  * [Optional Step - If using a private container registry](#private-registry)
-* [Pipeline Execution (Development/Iteration)](#execute-pipeline)
-  * [Minimal Pipeline Run](#minimal-pipeline-run)
-  * [Pipeline Run with Image Digest Pinning](#img-digest-pipeline-run)
-  * [Pipeline Run with a Private Container Registry](#private-registry-pipeline-run)
-* [Submit Results to Red Hat](#submit-result)
-  * [Submit results from Minimal Pipeline Run](#submit-result-minimal)
-  * [Submit results with Image Digest Pinning](#submit-result-img-digest)
-  * [Submit results with a private container registry](#submit-result-private-registy)
-  * [Submit results with Image Digest Pinning and a private container registry](#submit-result-registy-and-pinning)
+- [Operator Certification CI Pipeline<br/>Beta Instructions](#operator-certification-ci-pipelinebeta-instructions)
+  - [Table of Contents](#table-of-contents)
+  - [<a id="before-you-start"></a>Before you start:](#before-you-start)
+    - [<a id="what-you-need"></a>What you'll need before you start:](#what-youll-need-before-you-start)
+    - [<a id="prepare-bundle"></a>Prepare your Operator Bundle before you start](#prepare-your-operator-bundle-before-you-start)
+      - [Bundle structure](#bundle-structure)
+      - [Fork the upstream repo](#fork-the-upstream-repo)
+  - [<a id="installation"></a>Installation](#installation)
+    - [<a id="step1"></a>Step 1 - Install OpenShift Pipelines Operator](#step-1---install-openshift-pipelines-operator)
+    - [<a id="step2"></a>Step 2 - Configure the OpenShift CLI tool (oc)](#step-2---configure-the-openshift-cli-tool-oc)
+    - [<a id="step3"></a>Step 3 - Create an OpenShift Project (namespace) to work in](#step-3---create-an-openshift-project-namespace-to-work-in)
+    - [<a id="step4"></a>Step 4 - Add the Kubeconfig secret](#step-4---add-the-kubeconfig-secret)
+    - [<a id="step5"></a>Step 5 - Import Red Hat Catalogs](#step-5---import-red-hat-catalogs)
+    - [<a id="step6"></a>Step 6 - Install the Certification Pipeline and dependencies into the cluster](#step-6---install-the-certification-pipeline-and-dependencies-into-the-cluster)
+    - [<a id="step7"></a>Step 7 - Configuration Steps for Submitting Results](#step-7---configuration-steps-for-submitting-results)
+      - [<a id="github-api-token"></a>Add a GitHub API Token for the repo where the PR will be created](#add-a-github-api-token-for-the-repo-where-the-pr-will-be-created)
+      - [<a id="container-api-key"></a>Add Red Hat Container API access key](#add-red-hat-container-api-access-key)
+- [<a id="optional-config"></a>Optional Configuration](#optional-configuration)
+  - [<a id="digest-pinning-config"></a>Optional Step - If using digest pinning (required when submitting to Red Hat)](#optional-step---if-using-digest-pinning-required-when-submitting-to-red-hat)
+    - [<a id="private-key"></a>Add private key to access GitHub repo with Operator Bundle source](#add-private-key-to-access-github-repo-with-operator-bundle-source)
+  - [<a id="private-registry"></a>Optional Step - If using a private container registry](#optional-step---if-using-a-private-container-registry)
+    - [<a id="container-registry-creds"></a>Add credentials for the Container Registry](#add-credentials-for-the-container-registry)
+- [<a id="execute-pipeline"></a>Execute the Pipeline (Development Iterations)](#execute-the-pipeline-development-iterations)
+  - [<a id="minimal-pipeline-run"></a>Minimal Pipeline Run](#minimal-pipeline-run)
+  - [<a id="img-digest-pipeline-run"></a>Pipeline Run with Image Digest Pinning](#pipeline-run-with-image-digest-pinning)
+  - [<a id="private-registry-pipeline-run"></a>Pipeline Run with a Private Container Registry](#pipeline-run-with-a-private-container-registry)
+- [<a id="submit-result"></a>Submit Results to Red Hat](#submit-results-to-red-hat)
+  - [<a id="submit-result-minimal"></a>Submit results from Minimal Pipeline Run](#submit-results-from-minimal-pipeline-run)
+  - [<a id="submit-result-img-digest"></a>Submit results with Image Digest Pinning](#submit-results-with-image-digest-pinning)
+  - [<a id="submit-result-private-registy"></a>Submit results with a private container registry](#submit-results-with-a-private-container-registry)
+  - [<a id="submit-result-registy-and-pinning"></a>Submit results with Image Digest Pinning and a private container registry](#submit-results-with-image-digest-pinning-and-a-private-container-registry)
 
 
 ## <a id="before-you-start"></a>Before you start:
 
 ### <a id="what-you-need"></a>What you'll need before you start:
 1. An OpenShift Cluster *(recommended version 4.8 or above)*
-2. Kubeconfig file for a user with cluster admin privileges 
+2. Kubeconfig file for a user with cluster admin privileges (usually located at ~/.kube/config If this does not exist login to OpenShift via oc login and it will be created)
 3. The contents of your Operator Bundle
 4. [Install](https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html#installing-openshift-cli) `oc`, the OpenShift CLI tool (tested with version 4.7.13)
 5. [Install](https://tekton.dev/docs/cli/) `tkn`, the Tekton CLI tool (tested with version 0.19.1)
@@ -98,6 +106,13 @@ Once you have the contents of your Operator bundle structured properly,
 ```bash
 export KUBECONFIG=/path/to/your/cluster/kubeconfig
 ```
+
+Example:
+
+```shell
+export KUBECONFIG=~/.kube/config
+```
+
 > *This kubeconfig will be used to deploy the Operator under test and run the certification checks.*
 
 ### <a id="step3"></a>Step 3 - Create an OpenShift Project (namespace) to work in
